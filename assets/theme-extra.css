@@ -34,3 +34,8 @@ a.chip-btn{text-decoration:none}
 .express-pay .shopify-payment-button__button--unbranded:hover:not([disabled]){background:rgba(255,255,255,.06)}
 .express-pay .shopify-payment-button__more-options{color:var(--muted,#a9a8b3);font-size:13px;margin-top:10px;text-decoration:underline}
 @media (max-width:700px){.express-pay{--shopify-accelerated-checkout-button-block-size:48px}.express-pay .shopify-payment-button__button{min-height:48px}}
+/* Newsletter: Shopify adds .contact-form to customer forms; keep the field and button on one row like the design */
+.news form.contact-form{flex-direction:row;flex-wrap:wrap;align-items:center;gap:10px}
+.news form .field{height:58px;flex:1 1 220px}
+.news form .btn{flex:0 0 auto}
+@media (max-width:700px){.news form .btn{flex:1 1 100%}}
