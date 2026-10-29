@@ -1,0 +1,22 @@
+{%- layout none -%}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your {{ shop.name }} gift card</title>
+    {{ 'site.css' | asset_url | stylesheet_tag }}
+    {{ content_for_header }}
+  </head>
+  <body>
+    <main class="wrap" style="padding-block:64px;display:flex;flex-direction:column;gap:20px;max-width:560px">
+      <img src="{{ 'wordmark.png' | asset_url }}" alt="{{ shop.name }}" width="1058" height="726" style="width:140px;height:auto">
+      <h1 class="display" style="font-size:48px">Your gift card: <em>{{ gift_card.balance | money }}</em></h1>
+      {%- if gift_card.expired -%}<p class="lead">This gift card has expired.</p>{%- endif -%}
+      <p class="lead">Use this code at checkout:</p>
+      <div class="copyline"><code>{{ gift_card.code | format_code }}</code></div>
+      {%- if gift_card.pass_url -%}<a class="btn btn-ghost" href="{{ gift_card.pass_url }}">Add to Apple Wallet</a>{%- endif -%}
+      <a class="btn btn-holo" href="{{ shop.url }}">Start shopping <span class="arr">→</span></a>
+    </main>
+  </body>
+</html>

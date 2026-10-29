@@ -1,0 +1,43 @@
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow dot" style="--acc:var(--white)">Your bag</p>
+    <h1 class="display" style="font-size:clamp(40px,6vw,80px)">{% if cart.item_count > 0 %}Nearly <em>yours.</em>{% else %}Your bag is <em>empty.</em>{% endif %}</h1>
+  </div>
+</section>
+<section class="sec" style="padding-top:10px">
+  <div class="wrap">
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" class="cart-page">
+        <div class="lines">
+          {%- for item in cart.items -%}
+            <div class="line">
+              {%- if item.image -%}{{ item.image | image_url: width: 160 | image_tag: alt: '' }}{%- endif -%}
+              <div>
+                <h5><a href="{{ item.url }}" style="text-decoration:none">{{ item.product.title | split: ' | ' | first }}</a></h5>
+                {%- unless item.product.has_only_default_variant -%}<small>{{ item.variant.title }}</small>{%- endunless -%}
+                <div style="margin-top:8px">
+                  <label class="sr" for="u-{{ item.key }}">Quantity</label>
+                  <input class="field" style="height:44px;width:90px;flex:none" id="u-{{ item.key }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0">
+                </div>
+              </div>
+              <div class="price">{{ item.final_line_price | money }}</div>
+            </div>
+          {%- endfor -%}
+        </div>
+        <div class="drawer-foot" style="max-width:440px;margin-left:auto">
+          <div class="sub"><span>Subtotal</span><b>{{ cart.total_price | money }}</b></div>
+          <button class="btn btn-ghost" type="submit" name="update">Update bag</button>
+          <button class="btn btn-holo" type="submit" name="checkout">Checkout <span class="arr">→</span></button>
+          {%- if additional_checkout_buttons -%}<div class="express-pay">{{ content_for_additional_checkout_buttons }}</div>{%- endif -%}
+          <p class="fine">Bundle savings and delivery are calculated at checkout.</p>
+        </div>
+      </form>
+    {%- else -%}
+      <a class="btn btn-holo" href="{{ routes.all_products_collection_url }}">Shop perfume oils <span class="arr">→</span></a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Cart", "settings": [] }
+{% endschema %}

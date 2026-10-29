@@ -1,0 +1,14 @@
+<section class="page-hero">
+  <div class="wrap">
+    <h1 class="display" style="font-size:clamp(40px,6vw,80px)">{{ page.title }}</h1>
+  </div>
+</section>
+<section class="sec" style="padding-top:10px">
+  <div class="wrap">
+    <div class="prose rte">{{ page.content }}</div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Page", "settings": [] }
+{% endschema %}

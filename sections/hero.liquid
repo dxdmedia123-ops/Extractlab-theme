@@ -1,0 +1,50 @@
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      {%- if section.settings.eyebrow != blank -%}<p class="eyebrow dot" style="--acc:var(--white)">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h1 class="display">{{ section.settings.heading }}{% if section.settings.heading_em != blank %}<br><em>{{ section.settings.heading_em }}</em>{% endif %}</h1>
+      {%- if section.settings.lead != blank -%}<p class="lead">{{ section.settings.lead }}</p>{%- endif -%}
+      <div class="hero-ctas">
+        {%- if section.settings.btn1 != blank -%}<a class="btn btn-holo" href="{{ section.settings.btn1_link | default: routes.all_products_collection_url }}">{{ section.settings.btn1 }} <span class="arr">→</span></a>{%- endif -%}
+        {%- if section.settings.btn2 != blank -%}<a class="btn btn-ghost" href="{{ section.settings.btn2_link | default: routes.all_products_collection_url }}">{{ section.settings.btn2 }}</a>{%- endif -%}
+      </div>
+      <ul class="ticks">
+        {%- if section.settings.tick1 != blank -%}<li>{{ section.settings.tick1 }}</li>{%- endif -%}
+        {%- if section.settings.tick2 != blank -%}<li>{{ section.settings.tick2 }}</li>{%- endif -%}
+        {%- if section.settings.tick3 != blank -%}<li>{{ section.settings.tick3 }}</li>{%- endif -%}
+      </ul>
+    </div>
+    <div class="hero-art">
+      <div class="arch"><div class="ph">{% render 'pic', image: section.settings.image, asset: 'babayaga.jpg', alt: section.settings.image_alt, loading: 'eager', sizes: '(min-width: 900px) 500px, 100vw' %}</div></div>
+      {%- if section.settings.show_stamp -%}{% render 'stamp', id: section.id %}{%- endif -%}
+      {%- if section.settings.quote != blank -%}
+        <div class="chip"><span class="stars">★★★★★</span><q>{{ section.settings.quote }}</q><small>{{ section.settings.quote_by }}</small></div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Small label", "default": "Alcohol-free perfume oils · Handmade in Brisbane" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Say less." },
+    { "type": "text", "id": "heading_em", "label": "Heading (holographic italic line)", "default": "Smell louder." },
+    { "type": "textarea", "id": "lead", "label": "Intro", "default": "Small-batch fragrance roll-ons and grooming oils, blended by hand in a jojoba and argan base. Inspired by Morocco, made in Brisbane, from $17.99." },
+    { "type": "text", "id": "btn1", "label": "Main button", "default": "Shop perfume oils" },
+    { "type": "url", "id": "btn1_link", "label": "Main button link" },
+    { "type": "text", "id": "btn2", "label": "Second button", "default": "Beard & hair oils" },
+    { "type": "url", "id": "btn2_link", "label": "Second button link" },
+    { "type": "text", "id": "tick1", "label": "Tick 1", "default": "Alcohol-free" },
+    { "type": "text", "id": "tick2", "label": "Tick 2", "default": "Oil-based, made to linger" },
+    { "type": "text", "id": "tick3", "label": "Tick 3", "default": "Free delivery over $99" },
+    { "type": "image_picker", "id": "image", "label": "Photo", "info": "Leave empty to use the built-in Baba Yaga photo." },
+    { "type": "text", "id": "image_alt", "label": "Photo description", "default": "The Baba Yaga perfume oil on a dark wooden desk beside a glass of whisky" },
+    { "type": "checkbox", "id": "show_stamp", "label": "Show spinning stamp", "default": true },
+    { "type": "text", "id": "quote", "label": "Review quote", "default": "Don't know what it is but it is GOOD." },
+    { "type": "text", "id": "quote_by", "label": "Review name", "default": "Andy · Somber Mood" }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}

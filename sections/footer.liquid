@@ -1,0 +1,61 @@
+{%- assign c = routes.collections_url -%}
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div class="brand">
+        <img src="{{ 'wordmark.png' | asset_url }}" alt="{{ shop.name }}" width="1058" height="726" loading="lazy">
+        <p>{{ section.settings.blurb }}</p>
+        <div class="socials">
+          {%- if settings.social_instagram != blank -%}<a href="{{ settings.social_instagram }}" target="_blank" rel="noopener">Instagram</a>{%- endif -%}
+          {%- if settings.social_tiktok != blank -%}<a href="{{ settings.social_tiktok }}" target="_blank" rel="noopener">TikTok</a>{%- endif -%}
+          {%- if settings.social_facebook != blank -%}<a href="{{ settings.social_facebook }}" target="_blank" rel="noopener">Facebook</a>{%- endif -%}
+        </div>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="{{ c }}/black-noir-collection">Black Noir</a></li>
+          <li><a href="{{ c }}/white-extract-collection">White Extract</a></li>
+          <li><a href="{{ c }}/tropic-thunder-collection">Tropic Thunder</a></li>
+          <li><a href="{{ c }}/pink-sapphire-collection">Pink Sapphire</a></li>
+          <li><a href="{{ c }}/aura">Aura beard &amp; hair</a></li>
+          <li><a href="{{ c }}/discovery-perfume-oil-sets">Discovery sets</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <ul>
+          {%- if shop.shipping_policy.url != blank -%}<li><a href="{{ shop.shipping_policy.url }}">Shipping</a></li>{%- endif -%}
+          {%- if shop.refund_policy.url != blank -%}<li><a href="{{ shop.refund_policy.url }}">Returns &amp; refunds</a></li>{%- endif -%}
+          <li><a href="{{ routes.root_url }}pages/contact">Contact us</a></li>
+          <li><a href="{{ routes.root_url }}pages/contact#faq">FAQs</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>About</h4>
+        <ul>
+          <li><a href="{{ routes.root_url }}pages/our-story">Our story</a></li>
+          <li><a href="{{ routes.root_url }}pages/our-story#visit">Visit the store</a></li>
+          <li><a href="{{ routes.root_url }}pages/our-story#wholesale">Wholesale</a></li>
+          {%- if shop.privacy_policy.url != blank -%}<li><a href="{{ shop.privacy_policy.url }}">Privacy</a></li>{%- endif -%}
+        </ul>
+      </div>
+    </div>
+    <div class="base">
+      <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }} · {{ section.settings.base_left }}</span>
+      <span>{{ section.settings.base_right }}</span>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "section-footer",
+  "settings": [
+    { "type": "textarea", "id": "blurb", "label": "Brand blurb", "default": "Alcohol-free perfume, beard and hair oils, blended by hand in small batches in Brisbane. Inspired by Morocco." },
+    { "type": "text", "id": "base_left", "label": "Bottom line (left)", "default": "Brisbane, Australia · Australia-wide delivery" },
+    { "type": "text", "id": "base_right", "label": "Bottom line (right)", "default": "Alcohol-free · Oil-based · Handmade" }
+  ]
+}
+{% endschema %}

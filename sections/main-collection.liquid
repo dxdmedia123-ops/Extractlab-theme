@@ -1,0 +1,120 @@
+{%- liquid
+  assign is_all = false
+  if collection.handle == 'all' or collection.handle == blank
+    assign is_all = true
+  endif
+  assign current_block = nil
+  for block in section.blocks
+    if block.settings.collection.handle == collection.handle
+      assign current_block = block
+    endif
+  endfor
+-%}
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow dot" style="--acc:var(--white)">Shop</p>
+    {%- if is_all -%}
+      <h1 class="display" style="font-size:clamp(44px,7vw,92px)">{{ section.settings.heading }} <em>{{ section.settings.heading_em }}</em></h1>
+      <p class="lead">{{ section.settings.lead }}</p>
+    {%- else -%}
+      <h1 class="display" style="font-size:clamp(44px,7vw,92px)">{{ collection.title }}</h1>
+    {%- endif -%}
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    {%- paginate collection.products by section.settings.per_page -%}
+      <div class="toolbar">
+        <div class="chips" role="group" aria-label="Filter by collection">
+          <a class="chip-btn" data-f="all" href="{{ routes.all_products_collection_url }}{% if collection.sort_by %}?sort_by={{ collection.sort_by }}{% endif %}" aria-pressed="{{ is_all }}" style="--acc:transparent;text-decoration:none">Everything</a>
+          {%- for block in section.blocks -%}
+            {%- if block.settings.collection != blank -%}
+              {%- capture acc -%}{% render 'accent-var', key: block.settings.accent %}{%- endcapture -%}
+              {%- assign on = false -%}
+              {%- if block.settings.collection.handle == collection.handle -%}{%- assign on = true -%}{%- endif -%}
+              <a class="chip-btn" href="{{ block.settings.collection.url }}" aria-pressed="{{ on }}" style="--acc:{{ acc }};text-decoration:none" {{ block.shopify_attributes }}>{{ block.settings.label | default: block.settings.collection.title }}</a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        <div style="display:flex;align-items:center;gap:14px">
+          <span class="count">{{ collection.products_count }} product{% if collection.products_count != 1 %}s{% endif %}</span>
+          <label class="sr" for="sort">Sort</label>
+          {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+          <select id="sort" data-sort>
+            {%- for option in collection.sort_options -%}
+              <option value="{{ option.value | escape }}"{% if option.value == sort_by %} selected{% endif %}>{{ option.name | escape }}</option>
+            {%- endfor -%}
+          </select>
+        </div>
+      </div>
+
+      {%- if current_block != nil -%}
+        {%- capture acc -%}{% render 'accent-var', key: current_block.settings.accent %}{%- endcapture -%}
+        <div class="coll-banner" style="--acc:{{ acc }}">
+          <div class="txt">
+            <p class="eyebrow dot">{{ current_block.settings.label | default: collection.title }}{% if current_block.settings.kind != blank %} · {{ current_block.settings.kind }}{% endif %}</p>
+            <h2 class="display" style="font-size:clamp(32px,4vw,52px)">{{ current_block.settings.tagline }} <em>{{ current_block.settings.tagline_em }}</em></h2>
+            <p class="lead" style="font-size:16px">{{ current_block.settings.line | default: collection.description | strip_html | truncate: 160 }}</p>
+          </div>
+          {%- if current_block.settings.image != blank -%}
+            {{ current_block.settings.image | image_url: width: 800 | image_tag: loading: 'eager', alt: '' }}
+          {%- elsif current_block.settings.asset != blank -%}
+            {%- render 'asset-img', asset: current_block.settings.asset, alt: '', loading: 'eager' -%}
+          {%- elsif collection.image -%}
+            {{ collection.image | image_url: width: 800 | image_tag: alt: '' }}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="grid">
+        {%- for product in collection.products -%}
+          {%- if forloop.index <= 4 -%}{% render 'product-card', product: product, loading: 'eager' %}{%- else -%}{% render 'product-card', product: product %}{%- endif -%}
+        {%- else -%}
+          <p class="lead">No products here yet.</p>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <nav class="pager" aria-label="Pages">
+          {%- if paginate.previous -%}<a class="btn btn-ghost" href="{{ paginate.previous.url }}">← Previous</a>{%- endif -%}
+          <span class="count">Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
+          {%- if paginate.next -%}<a class="btn btn-ghost" href="{{ paginate.next.url }}">Next →</a>{%- endif -%}
+        </nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection page",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Shop-all heading", "default": "Every bottle," },
+    { "type": "text", "id": "heading_em", "label": "Shop-all heading (italic)", "default": "handmade." },
+    { "type": "textarea", "id": "lead", "label": "Shop-all intro", "default": "Perfume oils from $17.99, beard and hair oils at $25, and discovery sets to help you choose. Buy any six and save up to 15%." },
+    { "type": "range", "id": "per_page", "label": "Products per page", "min": 12, "max": 48, "step": 4, "default": 48 }
+  ],
+  "blocks": [
+    {
+      "type": "filter",
+      "name": "Filter button",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "label", "label": "Button label" },
+        { "type": "select", "id": "accent", "label": "Colour", "default": "noir", "options": [
+          { "value": "noir", "label": "Black Noir (silver)" }, { "value": "white", "label": "White Extract (gold)" },
+          { "value": "tropic", "label": "Tropic Thunder (lime)" }, { "value": "pink", "label": "Pink Sapphire (pink)" },
+          { "value": "aura", "label": "Aura (green)" }, { "value": "sets", "label": "Sets (lilac)" } ] },
+        { "type": "header", "content": "Banner shown on this collection" },
+        { "type": "text", "id": "kind", "label": "Label suffix", "default": "Perfume oils" },
+        { "type": "text", "id": "tagline", "label": "Tagline", "default": "Your new" },
+        { "type": "text", "id": "tagline_em", "label": "Tagline (italic)", "default": "signature." },
+        { "type": "textarea", "id": "line", "label": "Text" },
+        { "type": "image_picker", "id": "image", "label": "Banner photo" },
+        { "type": "text", "id": "asset", "label": "Built-in banner photo (used when no photo is chosen)" }
+      ]
+    }
+  ]
+}
+{% endschema %}

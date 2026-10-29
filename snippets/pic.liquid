@@ -1,0 +1,14 @@
+{%- comment -%}
+  Renders an image_picker image, or a built-in theme asset when none is chosen.
+  Params: image, asset, alt, loading, sizes
+{%- endcomment -%}
+{%- liquid
+  assign lz = loading | default: 'lazy'
+  assign sz = sizes | default: '(min-width: 900px) 50vw, 100vw'
+-%}
+{%- if image != blank -%}
+  {%- assign a = alt | default: image.alt | escape -%}
+  {{ image | image_url: width: 1600 | image_tag: loading: lz, widths: '400, 600, 800, 1000, 1200, 1600', sizes: sz, alt: a }}
+{%- elsif asset != blank -%}
+  {%- render 'asset-img', asset: asset, alt: alt, loading: lz -%}
+{%- endif -%}

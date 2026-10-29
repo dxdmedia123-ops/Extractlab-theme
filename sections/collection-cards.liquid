@@ -1,0 +1,51 @@
+<section class="sec" id="collections">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="eyebrow">{{ section.settings.eyebrow }}</p><h2 class="display">{{ section.settings.heading }} <em>{{ section.settings.heading_em }}</em></h2></div>
+      {%- if section.settings.lead != blank -%}<p class="lead" style="max-width:40ch">{{ section.settings.lead }}</p>{%- endif -%}
+    </div>
+    <div class="colls">
+      {%- for block in section.blocks -%}
+        {%- capture acc -%}{% render 'accent-var', key: block.settings.accent %}{%- endcapture -%}
+        <a class="coll" href="{{ block.settings.collection.url | default: routes.all_products_collection_url }}" style="--acc:{{ acc }}" {{ block.shopify_attributes }}>
+          <div class="ph">{% render 'pic', image: block.settings.image, asset: block.settings.asset, alt: block.settings.title, sizes: '(min-width: 1000px) 20vw, 50vw' %}</div>
+          <span class="from">{{ block.settings.price_label }}</span>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.text }}</p>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection cards",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Small label", "default": "Five collections" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Find your" },
+    { "type": "text", "id": "heading_em", "label": "Heading (italic)", "default": "signature." },
+    { "type": "textarea", "id": "lead", "label": "Intro", "default": "Every scent sits in a family. Start with the mood, then find the bottle." }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Collection card",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Black Noir" },
+        { "type": "text", "id": "price_label", "label": "Price label", "default": "From $17.99" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Dark, bold, unforgettable." },
+        { "type": "select", "id": "accent", "label": "Colour", "default": "noir", "options": [
+          { "value": "noir", "label": "Black Noir (silver)" }, { "value": "white", "label": "White Extract (gold)" },
+          { "value": "tropic", "label": "Tropic Thunder (lime)" }, { "value": "pink", "label": "Pink Sapphire (pink)" },
+          { "value": "aura", "label": "Aura (green)" }, { "value": "sets", "label": "Sets (lilac)" } ] },
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "text", "id": "asset", "label": "Built-in photo (used when no photo is chosen)" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Collection cards" }]
+}
+{% endschema %}

@@ -1,0 +1,37 @@
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow dot" style="--acc:var(--white)">Search</p>
+    <h1 class="display" style="font-size:clamp(40px,6vw,80px)">{% if search.performed %}Results for <em>“{{ search.terms | escape }}”</em>{% else %}Find your <em>scent.</em>{% endif %}</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" style="display:flex;gap:10px;flex-wrap:wrap;max-width:640px">
+      <label class="sr" for="q">Search</label>
+      <input class="field" id="q" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search oud, vanilla, beard oil…">
+      <input type="hidden" name="type" value="product">
+      <button class="btn btn-holo" type="submit">Search</button>
+    </form>
+  </div>
+</section>
+<section class="sec" style="padding-top:10px">
+  <div class="wrap">
+    {%- if search.performed -%}
+      {%- paginate search.results by 24 -%}
+        <div class="grid">
+          {%- for item in search.results -%}
+            {%- if item.object_type == 'product' -%}{% render 'product-card', product: item %}{%- endif -%}
+          {%- else -%}
+            <p class="lead">No matches. Try another word, like “oud” or “vanilla”.</p>
+          {%- endfor -%}
+        </div>
+        {%- if paginate.pages > 1 -%}
+          <nav class="pager" aria-label="Pages">
+            {%- if paginate.previous -%}<a class="btn btn-ghost" href="{{ paginate.previous.url }}">← Previous</a>{%- endif -%}
+            {%- if paginate.next -%}<a class="btn btn-ghost" href="{{ paginate.next.url }}">Next →</a>{%- endif -%}
+          </nav>
+        {%- endif -%}
+      {%- endpaginate -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Search", "settings": [] }
+{% endschema %}

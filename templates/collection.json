@@ -1,0 +1,109 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-collection",
+      "blocks": {
+        "filter_1": {
+          "type": "filter",
+          "settings": {
+            "collection": "black-noir-collection",
+            "label": "Black Noir",
+            "accent": "noir",
+            "kind": "Perfume oils",
+            "tagline": "Say less. Smell",
+            "tagline_em": "louder.",
+            "line": "Bold, sophisticated and mysterious.",
+            "asset": "set_noir.jpg"
+          }
+        },
+        "filter_2": {
+          "type": "filter",
+          "settings": {
+            "collection": "white-extract-collection",
+            "label": "White Extract",
+            "accent": "white",
+            "kind": "Perfume oils",
+            "tagline": "Your new",
+            "tagline_em": "signature.",
+            "line": "Clean, refined and effortlessly versatile.",
+            "asset": "white_lineup.jpg"
+          }
+        },
+        "filter_3": {
+          "type": "filter",
+          "settings": {
+            "collection": "tropic-thunder-collection",
+            "label": "Tropic Thunder",
+            "accent": "tropic",
+            "kind": "Perfume oils",
+            "tagline": "Endless summer,",
+            "tagline_em": "pocket-sized.",
+            "line": "Tropical fruit, fresh citrus, sweet honey and exotic florals.",
+            "asset": "drive_tropic.jpg"
+          }
+        },
+        "filter_4": {
+          "type": "filter",
+          "settings": {
+            "collection": "pink-sapphire-collection",
+            "label": "Pink Sapphire",
+            "accent": "pink",
+            "kind": "Perfume oils",
+            "tagline": "Soft. Sweet.",
+            "tagline_em": "Irresistible.",
+            "line": "Soft, feminine and utterly irresistible.",
+            "asset": "set_pink.jpg"
+          }
+        },
+        "filter_5": {
+          "type": "filter",
+          "settings": {
+            "collection": "aura",
+            "label": "Aura",
+            "accent": "aura",
+            "kind": "Beard & hair",
+            "tagline": "Tame the mane.",
+            "tagline_em": "Naturally.",
+            "line": "Hair and beard oils that nourish, soften and style.",
+            "asset": "drive_aura.jpg"
+          }
+        },
+        "filter_6": {
+          "type": "filter",
+          "settings": {
+            "collection": "discovery-perfume-oil-sets",
+            "label": "Discovery Sets",
+            "accent": "sets",
+            "kind": "",
+            "tagline": "Can't pick?",
+            "tagline_em": "Try three.",
+            "line": "Three full-size 9ml oils in one box.",
+            "asset": "set_smooth.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "filter_1",
+        "filter_2",
+        "filter_3",
+        "filter_4",
+        "filter_5",
+        "filter_6"
+      ]
+    },
+    "band": {
+      "type": "store-band",
+      "settings": {
+        "heading": "Buy 6,",
+        "heading_em": "save up to 15%.",
+        "sub": "Mix perfume oils, beard oils and sets. The discount applies automatically at checkout, and delivery is free over $99.",
+        "btn": "",
+        "margin_top": 90
+      }
+    }
+  },
+  "order": [
+    "main",
+    "band"
+  ]
+}

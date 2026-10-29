@@ -1,0 +1,18 @@
+<section class="page-hero"><div class="wrap"><p class="eyebrow dot" style="--acc:var(--white)">Journal</p><h1 class="display" style="font-size:clamp(40px,6vw,80px)">{{ blog.title }}</h1></div></section>
+<section class="sec" style="padding-top:10px"><div class="wrap">
+  {%- paginate blog.articles by 12 -%}
+    <div class="colls">
+      {%- for article in blog.articles -%}
+        <a class="coll" href="{{ article.url }}">
+          <div class="ph">{%- if article.image -%}{{ article.image | image_url: width: 700 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}</div>
+          <span class="from">{{ article.published_at | date: '%d %b %Y' }}</span>
+          <h3>{{ article.title }}</h3>
+        </a>
+      {%- endfor -%}
+    </div>
+    {%- if paginate.pages > 1 -%}<nav class="pager" aria-label="Pages">{%- if paginate.previous -%}<a class="btn btn-ghost" href="{{ paginate.previous.url }}">← Newer</a>{%- endif -%}{%- if paginate.next -%}<a class="btn btn-ghost" href="{{ paginate.next.url }}">Older →</a>{%- endif -%}</nav>{%- endif -%}
+  {%- endpaginate -%}
+</div></section>
+{% schema %}
+{ "name": "Blog", "settings": [] }
+{% endschema %}

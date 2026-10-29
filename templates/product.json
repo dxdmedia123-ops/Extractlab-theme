@@ -1,0 +1,42 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "tick_1": {
+          "type": "tick",
+          "settings": {
+            "text": "Alcohol-free"
+          }
+        },
+        "tick_2": {
+          "type": "tick",
+          "settings": {
+            "text": "Handmade in Brisbane"
+          }
+        },
+        "tick_3": {
+          "type": "tick",
+          "settings": {
+            "text": "Free delivery over $99"
+          }
+        },
+        "tick_4": {
+          "type": "tick",
+          "settings": {
+            "text": "Buy 6, save up to 15%"
+          }
+        }
+      },
+      "block_order": [
+        "tick_1",
+        "tick_2",
+        "tick_3",
+        "tick_4"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

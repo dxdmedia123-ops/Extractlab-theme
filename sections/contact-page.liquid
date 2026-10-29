@@ -1,0 +1,95 @@
+{%- assign s = section.settings -%}
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow dot" style="--acc:var(--white)">Contact us</p>
+    <h1 class="display" style="font-size:clamp(44px,7vw,92px)">{{ s.heading }} <em>{{ s.heading_em }}</em></h1>
+    <p class="lead">{{ s.lead }}</p>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:20px">
+  <div class="wrap">
+    <div class="ways">
+      <div class="way" style="--acc:var(--white)">
+        <span class="eyebrow dot">Email</span>
+        <h3>Drop us a line</h3>
+        <p>Best for orders, delivery and anything that needs a paper trail.</p>
+        <div class="copyline"><code>{{ settings.contact_email }}</code><button class="small-btn" type="button" data-copy="{{ settings.contact_email }}">Copy</button></div>
+      </div>
+      <div class="way" style="--acc:var(--pink)">
+        <span class="eyebrow dot">Instagram</span>
+        <h3>Send us a DM</h3>
+        <p>Quickest for scent advice. Tell us what you wear now and we'll point you to a match.</p>
+        <div class="socials"><a href="{{ settings.social_instagram }}" target="_blank" rel="noopener">Instagram</a><a href="{{ settings.social_tiktok }}" target="_blank" rel="noopener">TikTok</a></div>
+      </div>
+      <div class="way" style="--acc:var(--tropic)">
+        <span class="eyebrow dot">Visit</span>
+        <h3>Queen St Mall</h3>
+        <p>Uptown, Level Q, Queen St Mall, Brisbane. Smell the full range in person and bring your empty bottle for a <b>$15 refill</b>.</p>
+        <a class="btn btn-ghost" style="height:44px;font-size:14px;align-self:flex-start" href="https://www.google.com/maps/search/?api=1&amp;query=Uptown+Queen+St+Mall+Brisbane" target="_blank" rel="noopener">Get directions <span class="arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0">
+  <div class="wrap contact-split">
+    <div class="contact-form">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <p class="eyebrow">Send a message</p>
+        <h2 class="display" style="font-size:clamp(32px,4.4vw,56px)">We read <em>every one.</em></h2>
+      </div>
+      {%- form 'contact', id: 'contact-form', class: 'form' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="form-msg full" role="status">Thanks, your message is in. Adam will get back to you soon.</p>
+        {%- elsif form.errors -%}
+          <p class="form-msg full" role="alert">{{ form.errors | default_errors }}</p>
+        {%- endif -%}
+        <label class="sr" for="c-name">Name</label><input class="field" id="c-name" name="contact[name]" placeholder="Name" autocomplete="name" required>
+        <label class="sr" for="c-email">Email</label><input class="field" id="c-email" name="contact[email]" type="email" placeholder="Email" autocomplete="email" required>
+        <label class="sr" for="c-phone">Phone</label><input class="field" id="c-phone" name="contact[phone]" type="tel" placeholder="Phone (optional)" autocomplete="tel">
+        <label class="sr" for="c-topic">Topic</label>
+        <select class="field" id="c-topic" name="contact[Topic]">
+          <option>Scent advice</option><option>An existing order</option><option>Custom blend</option><option>Wholesale &amp; bulk</option><option>Something else</option>
+        </select>
+        <label class="sr" for="c-order">Order number</label><input class="field full" id="c-order" name="contact[Order number]" placeholder="Order number (if it's about an order)">
+        <label class="sr" for="c-msg">Message</label><textarea class="field" id="c-msg" name="contact[body]" placeholder="How can we help?" required></textarea>
+        <div class="full"><button class="btn btn-holo" type="submit">Send message <span class="arr">→</span></button></div>
+      {%- endform -%}
+    </div>
+    <div class="contact-art arch"><div class="ph">{% render 'pic', image: s.image, asset: 'white_lineup.jpg', alt: 'White Extract roll-ons lined up on the Brisbane river wall' %}</div></div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0" id="faq">
+  <div class="wrap faq">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <p class="eyebrow">Quick answers</p>
+      <h2 class="display" style="font-size:clamp(32px,4.4vw,56px)">Before you <em>ask.</em></h2>
+      <p class="lead" style="font-size:16px">The questions we get most often.</p>
+    </div>
+    <div class="acc">
+      {%- for block in section.blocks -%}
+        <details{% if forloop.first %} open{% endif %} {{ block.shopify_attributes }}><summary><span>{{ block.settings.q }}</span></summary><div class="in">{{ block.settings.a }}</div></details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact page",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Questions?" },
+    { "type": "text", "id": "heading_em", "label": "Heading (italic)", "default": "Ask Adam." },
+    { "type": "textarea", "id": "lead", "label": "Intro", "default": "Scent advice, an order question, a custom blend or a wholesale enquiry. Send a message and Adam will get back to you, usually within one business day." },
+    { "type": "image_picker", "id": "image", "label": "Photo", "info": "Leave empty to use the built-in White Extract photo." }
+  ],
+  "blocks": [
+    { "type": "faq", "name": "FAQ", "settings": [
+      { "type": "text", "id": "q", "label": "Question", "default": "How long does delivery take?" },
+      { "type": "richtext", "id": "a", "label": "Answer", "default": "<p>We ship Australia-wide from Brisbane.</p>" }
+    ] }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,11 @@
+<section class="page-hero"><div class="wrap" style="max-width:520px">
+  <h1 class="display" style="font-size:clamp(40px,6vw,72px)">Create an <em>account.</em></h1>
+  {%- form 'create_customer', class: 'form', style: 'grid-template-columns:1fr' -%}
+    {%- if form.errors -%}<p class="form-msg" role="alert">{{ form.errors | default_errors }}</p>{%- endif -%}
+    <label class="sr" for="rg-first">First name</label><input class="field" id="rg-first" name="customer[first_name]" placeholder="First name" autocomplete="given-name">
+    <label class="sr" for="rg-last">Last name</label><input class="field" id="rg-last" name="customer[last_name]" placeholder="Last name" autocomplete="family-name">
+    <label class="sr" for="rg-email">Email</label><input class="field" id="rg-email" type="email" name="customer[email]" placeholder="Email" autocomplete="email" required>
+    <label class="sr" for="rg-pw">Password</label><input class="field" id="rg-pw" type="password" name="customer[password]" placeholder="Password" autocomplete="new-password" required>
+    <button class="btn btn-holo" type="submit">Create account</button>
+  {%- endform -%}
+</div></section>

@@ -1,0 +1,54 @@
+{%- if section.settings.show_announcement -%}
+  <div class="announce">
+    <div class="wrap">
+      {%- if section.settings.ann_1 != blank -%}<span>{{ section.settings.ann_1 }}</span>{%- endif -%}
+      {%- if section.settings.ann_2 != blank -%}<i aria-hidden="true">✦</i><span>{{ section.settings.ann_2 }}</span>{%- endif -%}
+      {%- if section.settings.ann_3 != blank -%}<i aria-hidden="true">✦</i><span>{{ section.settings.ann_3 }}</span>{%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }} home">
+      {%- if section.settings.logo != blank -%}
+        {{ section.settings.logo | image_url: width: 300 | image_tag: alt: shop.name, widths: '150, 300' }}
+      {%- else -%}
+        <img src="{{ 'wordmark.png' | asset_url }}" alt="{{ shop.name }}" width="1058" height="726">
+      {%- endif -%}
+    </a>
+    <nav class="nav" aria-label="Main">
+      {%- if section.settings.menu != blank and linklists[section.settings.menu].links.size > 0 -%}
+        {%- for link in linklists[section.settings.menu].links -%}
+          <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a>
+        {%- endfor -%}
+      {%- else -%}
+        <a href="{{ routes.all_products_collection_url }}"{% if collection.handle == 'all' %} aria-current="page"{% endif %}>Shop all</a>
+        <a href="{{ routes.root_url }}#collections">Collections</a>
+        <a href="{{ routes.collections_url }}/aura">Beard &amp; hair</a>
+        <a href="{{ routes.collections_url }}/discovery-perfume-oil-sets">Discovery sets</a>
+        <a href="{{ routes.root_url }}pages/our-story"{% if page.handle == 'our-story' %} aria-current="page"{% endif %}>Our story</a>
+        <a href="{{ routes.root_url }}pages/our-story#wholesale">Wholesale</a>
+        <a href="{{ routes.root_url }}pages/contact"{% if page.handle == 'contact' %} aria-current="page"{% endif %}>Contact</a>
+      {%- endif -%}
+    </nav>
+    <div class="head-actions">
+      <a class="bag-btn" href="{{ routes.cart_url }}" data-open-bag aria-label="Open bag">Bag <b data-bag-count>{{ cart.item_count }}</b></a>
+      <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-header",
+  "settings": [
+    { "type": "checkbox", "id": "show_announcement", "label": "Show announcement bar", "default": true },
+    { "type": "text", "id": "ann_1", "label": "Announcement 1", "default": "Free delivery on orders over $99" },
+    { "type": "text", "id": "ann_2", "label": "Announcement 2", "default": "Buy 6, save up to 15%" },
+    { "type": "text", "id": "ann_3", "label": "Announcement 3", "default": "Handmade in Brisbane" },
+    { "type": "image_picker", "id": "logo", "label": "Logo", "info": "Leave empty to use the built-in Extract Lab wordmark." },
+    { "type": "link_list", "id": "menu", "label": "Menu", "info": "Leave empty to use the built-in menu (Shop all, Collections, Beard & hair, Discovery sets, Our story, Wholesale, Contact)." }
+  ]
+}
+{% endschema %}

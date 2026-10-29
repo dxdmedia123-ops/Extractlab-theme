@@ -1,0 +1,17 @@
+<section class="page-hero"><div class="wrap" style="max-width:520px">
+  <h1 class="display" style="font-size:clamp(40px,6vw,72px)">Log <em>in.</em></h1>
+  {%- form 'customer_login', class: 'form', style: 'grid-template-columns:1fr' -%}
+    {%- if form.errors -%}<p class="form-msg" role="alert">{{ form.errors | default_errors }}</p>{%- endif -%}
+    <label class="sr" for="li-email">Email</label><input class="field" id="li-email" type="email" name="customer[email]" placeholder="Email" autocomplete="email" required>
+    <label class="sr" for="li-pw">Password</label><input class="field" id="li-pw" type="password" name="customer[password]" placeholder="Password" autocomplete="current-password" required>
+    <button class="btn btn-holo" type="submit">Log in</button>
+  {%- endform -%}
+  <p class="lead" style="font-size:15px"><a href="{{ routes.account_register_url }}">Create an account</a> · <a href="#recover" onclick="document.getElementById('recover').hidden=false;return false">Forgot your password?</a></p>
+  <div id="recover" hidden>
+    {%- form 'recover_customer_password', class: 'form', style: 'grid-template-columns:1fr' -%}
+      {%- if form.posted_successfully? -%}<p class="form-msg" role="status">Check your email for a reset link.</p>{%- endif -%}
+      <label class="sr" for="rc-email">Email</label><input class="field" id="rc-email" type="email" name="email" placeholder="Email" autocomplete="email" required>
+      <button class="btn btn-ghost" type="submit">Send reset link</button>
+    {%- endform -%}
+  </div>
+</div></section>

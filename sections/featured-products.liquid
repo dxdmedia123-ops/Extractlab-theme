@@ -1,0 +1,34 @@
+<section class="sec" style="padding-top:{{ section.settings.pad_top }}px">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="eyebrow">{{ section.settings.eyebrow }}</p><h2 class="display">{{ section.settings.heading }} <em>{{ section.settings.heading_em }}</em></h2></div>
+      {%- if section.settings.btn != blank -%}<a class="btn btn-ghost" href="{{ section.settings.btn_link | default: routes.all_products_collection_url }}">{{ section.settings.btn }} <span class="arr">→</span></a>{%- endif -%}
+    </div>
+    <div class="grid">
+      {%- if section.settings.products != blank -%}
+        {%- for product in section.settings.products limit: section.settings.limit -%}{% render 'product-card', product: product %}{%- endfor -%}
+      {%- else -%}
+        {%- assign col = section.settings.collection | default: collections.all -%}
+        {%- for product in col.products limit: section.settings.limit -%}{% render 'product-card', product: product %}{%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured products",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Small label", "default": "Most loved" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The bottles people" },
+    { "type": "text", "id": "heading_em", "label": "Heading (italic)", "default": "come back for." },
+    { "type": "product_list", "id": "products", "label": "Products", "limit": 12, "info": "Pick products, or leave empty to show a collection." },
+    { "type": "collection", "id": "collection", "label": "Collection (if no products picked)" },
+    { "type": "range", "id": "limit", "label": "Number shown", "min": 2, "max": 12, "step": 1, "default": 8 },
+    { "type": "text", "id": "btn", "label": "Button", "default": "Shop everything" },
+    { "type": "url", "id": "btn_link", "label": "Button link" },
+    { "type": "range", "id": "pad_top", "label": "Space above", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 0 }
+  ],
+  "presets": [{ "name": "Featured products" }]
+}
+{% endschema %}

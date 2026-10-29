@@ -1,0 +1,62 @@
+{
+  "sections": {
+    "main": {
+      "type": "contact-page",
+      "blocks": {
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "q": "How long does delivery take?",
+            "a": "<p>We ship Australia-wide from Brisbane. Orders are usually dispatched within 1–3 business days, and delivery is free on orders over $99.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "q": "How do the bundle savings work?",
+            "a": "<p>Buy any six products, mixing perfume oils, beard oils and sets, and save up to 15%. The discount applies automatically at checkout.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "q": "Are the perfumes really alcohol-free?",
+            "a": "<p>Yes. Every fragrance is an oil-based roll-on with no alcohol, so it won't dry out your skin and the scent sits close and lasts.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "q": "How long does a 9ml bottle last?",
+            "a": "<p>Because it's oil, a little goes a long way. With daily wear, one bottle can last for months.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "q": "Can I refill my bottle?",
+            "a": "<p>Yes. Bring your empty bottle to our Queen St Mall store (Uptown, Level Q) and we'll refill it for $15.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "q": "Do you do wholesale or custom blends?",
+            "a": "<p>We do. We supply salons, barbershops, spas and retailers with 40–50% retail margins, and we take private label and custom blend enquiries. <a href=\"/pages/our-story#wholesale\">Apply for wholesale</a> or choose \"Custom blend\" in the form above.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

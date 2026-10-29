@@ -1,0 +1,43 @@
+{%- comment -%}
+  Outputs the collection colour key for a product: noir, white, tropic, pink, aura or sets.
+  Usage: {%- capture key -%}{% render 'accent-key', product: product %}{%- endcapture -%}
+{%- endcomment -%}
+{%- liquid
+  assign key = ''
+  for c in product.collections
+    if c.handle contains 'noir'
+      assign key = 'noir'
+    elsif c.handle contains 'white'
+      assign key = 'white'
+    elsif c.handle contains 'tropic'
+      assign key = 'tropic'
+    elsif c.handle contains 'pink'
+      assign key = 'pink'
+    elsif c.handle contains 'aura' or c.handle contains 'beard'
+      assign key = 'aura'
+    endif
+    if key != ''
+      break
+    endif
+  endfor
+  if key == ''
+    assign t = product.type | downcase
+    assign ti = product.title | downcase
+    if t contains 'beard' or t contains 'hair'
+      assign key = 'aura'
+    elsif t contains 'discovery' or ti contains 'discovery'
+      assign key = 'sets'
+    elsif ti contains 'black noir'
+      assign key = 'noir'
+    elsif ti contains 'white extract'
+      assign key = 'white'
+    elsif ti contains 'tropic thunder'
+      assign key = 'tropic'
+    elsif ti contains 'pink sapphire'
+      assign key = 'pink'
+    else
+      assign key = 'sets'
+    endif
+  endif
+  echo key
+-%}

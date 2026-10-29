@@ -1,0 +1,22 @@
+<div class="scrim" data-close-bag></div>
+<aside class="drawer" aria-label="Your bag" aria-hidden="true">
+  <div class="drawer-head">
+    <h2>Your bag</h2>
+    <button class="x" type="button" data-close-bag aria-label="Close bag">✕</button>
+  </div>
+  <p class="meter" id="ship-msg"></p>
+  <div class="bar"><i id="ship-bar"></i></div>
+  <p class="meter" id="bundle-msg"></p>
+  <div class="bar"><i id="bundle-bar"></i></div>
+  <div class="lines" id="bag-lines"></div>
+  <div class="drawer-foot">
+    <div class="sub"><span>Subtotal</span><b id="bag-sub">{{ cart.total_price | money }}</b></div>
+    <form action="{{ routes.cart_url }}" method="post">
+      <button class="btn btn-holo" type="submit" name="checkout" style="width:100%">Checkout <span class="arr">→</span></button>
+    </form>
+    {%- if additional_checkout_buttons -%}
+      <div class="express-pay" data-express{% if cart.item_count == 0 %} hidden{% endif %}>{{ content_for_additional_checkout_buttons }}</div>
+    {%- endif -%}
+    <p class="fine">Bundle savings and delivery are calculated at checkout.</p>
+  </div>
+</aside>

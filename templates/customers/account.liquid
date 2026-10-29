@@ -1,0 +1,19 @@
+<section class="page-hero"><div class="wrap">
+  <h1 class="display" style="font-size:clamp(40px,6vw,72px)">Hi, <em>{{ customer.first_name | default: 'there' }}.</em></h1>
+  <p class="lead"><a href="{{ routes.account_addresses_url }}">Addresses ({{ customer.addresses_count }})</a> · <a href="{{ routes.account_logout_url }}">Log out</a></p>
+</div></section>
+<section class="sec" style="padding-top:10px"><div class="wrap">
+  {%- paginate customer.orders by 20 -%}
+    <div class="lines">
+      {%- for order in customer.orders -%}
+        <div class="line" style="grid-template-columns:1fr auto auto">
+          <div><h5><a href="{{ order.customer_url }}">{{ order.name }}</a></h5><small>{{ order.created_at | date: '%d %b %Y' }} · {{ order.fulfillment_status_label }}</small></div>
+          <small>{{ order.financial_status_label }}</small>
+          <div class="price">{{ order.total_price | money }}</div>
+        </div>
+      {%- else -%}
+        <p class="lead">You haven't placed any orders yet.</p>
+      {%- endfor -%}
+    </div>
+  {%- endpaginate -%}
+</div></section>

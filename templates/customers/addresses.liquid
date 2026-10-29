@@ -1,0 +1,26 @@
+<section class="page-hero"><div class="wrap">
+  <p class="eyebrow"><a href="{{ routes.account_url }}">← Account</a></p>
+  <h1 class="display" style="font-size:clamp(40px,6vw,72px)">Your <em>addresses.</em></h1>
+</div></section>
+<section class="sec" style="padding-top:10px"><div class="wrap" style="display:grid;gap:30px">
+  {%- paginate customer.addresses by 10 -%}
+    {%- for address in customer.addresses -%}
+      <div class="way"><p class="lead">{{ address | format_address }}</p>{%- if address == customer.default_address -%}<small>Default</small>{%- endif -%}
+        {%- form 'customer_address', address -%}<input type="hidden" name="_method" value="delete"><button class="small-btn" type="submit">Delete</button>{%- endform -%}
+      </div>
+    {%- endfor -%}
+  {%- endpaginate -%}
+  <h3>Add an address</h3>
+  {%- form 'customer_address', customer.new_address, class: 'form' -%}
+    <input class="field" name="address[first_name]" placeholder="First name" autocomplete="given-name" aria-label="First name">
+    <input class="field" name="address[last_name]" placeholder="Last name" autocomplete="family-name" aria-label="Last name">
+    <input class="field full" name="address[address1]" placeholder="Address" autocomplete="address-line1" aria-label="Address">
+    <input class="field" name="address[city]" placeholder="Suburb" autocomplete="address-level2" aria-label="Suburb">
+    <input class="field" name="address[province]" placeholder="State" autocomplete="address-level1" aria-label="State">
+    <input class="field" name="address[zip]" placeholder="Postcode" autocomplete="postal-code" aria-label="Postcode">
+    <input class="field" name="address[country]" value="Australia" autocomplete="country-name" aria-label="Country">
+    <input class="field" name="address[phone]" placeholder="Phone" autocomplete="tel" aria-label="Phone">
+    <label class="full" style="display:flex;gap:10px;align-items:center"><input type="checkbox" name="address[default]" value="1"> Set as default</label>
+    <div class="full"><button class="btn btn-holo" type="submit">Save address</button></div>
+  {%- endform -%}
+</div></section>

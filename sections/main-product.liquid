@@ -1,0 +1,206 @@
+{%- capture key -%}{% render 'accent-key', product: product %}{%- endcapture -%}
+{%- capture acc -%}{% render 'accent-var', key: key %}{%- endcapture -%}
+{%- capture cname -%}{% render 'accent-name', key: key %}{%- endcapture -%}
+{%- capture chips -%}{% render 'product-notes', product: product, as_chips: true %}{%- endcapture -%}
+{%- liquid
+  assign current = product.selected_or_first_available_variant
+  assign title = product.title | split: ' | ' | first
+  assign t = product.type | downcase
+  assign tl = product.title | downcase
+  assign kind = 'Perfume oil'
+  assign size = '9ml roll-on'
+  assign is_oil = false
+  if key == 'aura' or t contains 'beard' or t contains 'hair'
+    assign kind = 'Beard & hair oil'
+    assign size = '30ml dropper'
+    assign is_oil = true
+  elsif t contains 'discovery' or tl contains 'discovery'
+    assign kind = 'Discovery set'
+    assign size = '3 × 9ml'
+  elsif tl contains 'complete'
+    assign kind = 'Complete collection'
+    assign size = '5 × 9ml'
+  endif
+
+  assign paras = product.description | split: '</p>'
+  assign lead = ''
+  for p in paras
+    assign txt = p | strip_html | strip
+    if txt != ''
+      unless txt contains '•'
+        assign lead = txt
+        break
+      endunless
+    endif
+  endfor
+  if lead == ''
+    assign lead = product.description | strip_html | truncatewords: 40
+  endif
+
+  assign off = 0
+  if current.compare_at_price > current.price
+    assign diff = current.compare_at_price | minus: current.price | times: 100.0
+    assign off = diff | divided_by: current.compare_at_price | round
+  endif
+
+  assign home_coll = nil
+  for c in product.collections
+    if c.handle contains 'noir' or c.handle contains 'white' or c.handle contains 'tropic' or c.handle contains 'pink' or c.handle contains 'aura' or c.handle contains 'discovery'
+      assign home_coll = c
+      break
+    endif
+  endfor
+  assign complete = nil
+  if home_coll != nil
+    for p in home_coll.products
+      assign pt = p.title | downcase
+      if pt contains 'complete' and p.id != product.id
+        assign complete = p
+        break
+      endif
+    endfor
+  endif
+-%}
+
+<div style="--acc:{{ acc }}">
+  <div class="wrap pdp">
+    <div class="gallery">
+      <div class="main">
+        {%- assign first = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
+        {%- if first -%}
+          {%- assign main_alt = first.alt | default: title | escape -%}
+          {{ first | image_url: width: 1400 | image_tag: id: 'main-img', loading: 'eager', fetchpriority: 'high', widths: '500, 800, 1100, 1400', sizes: '(min-width: 900px) 50vw, 100vw', alt: main_alt }}
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+        {%- endif -%}
+      </div>
+      {%- if product.media.size > 1 -%}
+        <div class="thumbs">
+          {%- for m in product.media -%}
+            {%- if m.media_type == 'image' -%}
+              <button type="button" aria-label="Show photo {{ forloop.index }}" aria-current="{% if m.id == first.id %}true{% else %}false{% endif %}" data-img="{{ m | image_url: width: 1400 }}" data-srcset="{{ m | image_url: width: 800 }} 800w, {{ m | image_url: width: 1400 }} 1400w">
+                {{ m | image_url: width: 200 | image_tag: loading: 'lazy', alt: '' }}
+              </button>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="buy">
+      <p class="eyebrow dot">{{ cname }} · {{ kind }}</p>
+      <h1 class="display">{{ title }}</h1>
+      {%- if chips != blank -%}<div class="notes-row">{{ chips }}</div>{%- endif -%}
+      {%- if lead != blank -%}<p class="lead">{{ lead }}</p>{%- endif -%}
+      <div>
+        <span class="price" data-price>{{ current.price | money }}{%- if current.compare_at_price > current.price -%}<s>{{ current.compare_at_price | money }}</s>{%- endif -%}</span>
+        {%- if off > 0 -%}<span class="save-pill">Save {{ off }}%</span>{%- endif -%}
+      </div>
+
+      {%- form 'product', product, id: 'product-form', class: 'product-form', data-product-form: '' -%}
+        {%- unless product.has_only_default_variant -%}
+          <label class="sr" for="variant-select">Option</label>
+          <select class="field variant-select" id="variant-select" name="id" style="margin-bottom:12px;width:100%">
+            {%- for v in product.variants -%}
+              <option value="{{ v.id }}"{% if v.id == current.id %} selected{% endif %}{% unless v.available %} disabled{% endunless %} data-price="{{ v.price | money | escape }}">{{ v.title }}{% unless v.available %} (sold out){% endunless %} · {{ v.price | money }}</option>
+            {%- endfor -%}
+          </select>
+        {%- else -%}
+          <input type="hidden" name="id" value="{{ current.id }}">
+        {%- endunless -%}
+        <div class="buy-row">
+          <div class="stepper">
+            <button type="button" aria-label="Fewer" data-step="-1">−</button>
+            <input class="qty-input" type="number" name="quantity" id="qty" value="1" min="1" max="20" aria-label="Quantity">
+            <button type="button" aria-label="More" data-step="1">+</button>
+          </div>
+          <button class="btn btn-holo" type="submit" data-main-add {% unless current.available %}disabled{% endunless %}>
+            {%- if current.available -%}Add to bag · {{ size }}{%- else -%}Sold out{%- endif -%}
+          </button>
+        </div>
+        {%- if section.settings.show_dynamic_checkout and current.available -%}
+          <div class="express-pay">{{ form | payment_button }}</div>
+        {%- endif -%}
+      {%- endform -%}
+
+      <ul class="ticks">
+        {%- for block in section.blocks -%}{%- if block.type == 'tick' -%}<li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>{%- endif -%}{%- endfor -%}
+      </ul>
+
+      {%- if complete != nil -%}
+        <div class="upsell">
+          {%- if complete.featured_media -%}{{ complete.featured_media | image_url: width: 240 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}
+          <div><small>Complete the collection</small><h4>{{ complete.title | split: ' | ' | first }}</h4><span class="price" style="font-size:18px">{{ complete.price | money }}</span></div>
+          {%- if complete.available -%}<button class="add" type="button" data-add="{{ complete.selected_or_first_available_variant.id }}" data-title="{{ complete.title | escape }}">Add</button>{%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="acc">
+        <details open><summary>How to wear</summary><div class="in">
+          {%- if is_oil -%}{{ section.settings.how_oil }}{%- else -%}{{ section.settings.how_perfume }}{%- endif -%}
+        </div></details>
+        <details><summary>What's inside</summary><div class="in">
+          {%- if is_oil -%}{{ section.settings.inside_oil }}{%- else -%}{{ section.settings.inside_perfume }}{%- endif -%}
+        </div></details>
+        {%- if product.description != blank -%}
+          <details><summary>Full details</summary><div class="in rte">{{ product.description }}</div></details>
+        {%- endif -%}
+        <details><summary>Delivery</summary><div class="in">{{ section.settings.delivery }}</div></details>
+      </div>
+    </div>
+  </div>
+
+  {%- if section.settings.show_related -%}
+    {%- liquid
+      assign shown = 0
+      assign rel_coll = home_coll | default: collections.all
+    -%}
+    <section class="sec" style="padding-top:20px">
+      <div class="wrap">
+        <div class="sec-head">
+          <div><p class="eyebrow">You might also like</p><h2 class="display" style="font-size:clamp(32px,4vw,52px)">More from <em>{{ cname }}</em></h2></div>
+          <a class="btn btn-ghost" href="{{ rel_coll.url }}">Shop {{ cname }} <span class="arr">→</span></a>
+        </div>
+        <div class="grid">
+          {%- for p in rel_coll.products -%}
+            {%- assign pt = p.title | downcase -%}
+            {%- if p.id != product.id and shown < 4 -%}
+              {%- unless pt contains 'complete' -%}
+                {% render 'product-card', product: p %}
+                {%- assign shown = shown | plus: 1 -%}
+              {%- endunless -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+</div>
+
+<div class="mbar" aria-hidden="true">
+  {%- if product.featured_media -%}{{ product.featured_media | image_url: width: 120 | image_tag: alt: '' }}{%- endif -%}
+  <div><b>{{ title }}</b><span>{{ current.price | money }}</span></div>
+  {%- if current.available -%}<button class="btn btn-holo" type="button" data-add="{{ current.id }}" data-title="{{ title | escape }}" tabindex="-1">Add to bag</button>{%- endif -%}
+</div>
+
+<script type="application/ld+json">
+  {{ product | structured_data }}
+</script>
+
+{% schema %}
+{
+  "name": "Product page",
+  "settings": [
+    { "type": "richtext", "id": "how_perfume", "label": "How to wear (perfume)", "default": "<p>Roll onto pulse points: wrists, neck and behind the ears. Let it sit; there's no need to rub.</p><p>Because it's oil, the scent stays close and lasts. A little goes a long way, so one bottle can last for months.</p>" },
+    { "type": "richtext", "id": "how_oil", "label": "How to use (beard & hair oil)", "default": "<p>Warm 3–5 drops between your palms and work through your beard or hair, right down to the skin. Comb through to finish.</p><p>Use daily, or after a shower when hair is still slightly damp.</p>" },
+    { "type": "richtext", "id": "inside_perfume", "label": "What's inside (perfume)", "default": "<p>Fragrance oil carried in a natural jojoba base: lightweight, skin-nourishing and fast-absorbing. Alcohol-free.</p>" },
+    { "type": "richtext", "id": "inside_oil", "label": "What's inside (beard & hair oil)", "default": "<p>A blend of nourishing carrier oils including argan and jojoba, with fragrance. Alcohol-free. 30ml glass dropper bottle.</p>" },
+    { "type": "richtext", "id": "delivery", "label": "Delivery", "default": "<p>Australia-wide from Brisbane. Orders are usually dispatched within 1–3 business days. Free delivery on orders over $99.</p><p>In Brisbane? Visit us at Queen St Mall, Uptown Level Q, for $15 refills.</p>" },
+    { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Show 'Buy with Shop' button", "info": "Shows Shop Pay (or other express checkouts you've turned on in Settings → Payments) under Add to bag. It buys the selected option and quantity straight away.", "default": true },
+    { "type": "checkbox", "id": "show_related", "label": "Show 'More from this collection'", "default": true }
+  ],
+  "blocks": [
+    { "type": "tick", "name": "Tick", "settings": [ { "type": "text", "id": "text", "label": "Text", "default": "Alcohol-free" } ] }
+  ]
+}
+{% endschema %}

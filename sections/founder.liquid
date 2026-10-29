@@ -1,0 +1,28 @@
+<section class="founder sec" style="padding-top:20px">
+  <div class="wrap">
+    <div class="arch"><div class="ph">{% render 'pic', image: section.settings.image, asset: 'hero.jpg', alt: section.settings.image_alt %}</div></div>
+    <div class="founder-copy">
+      <p class="eyebrow dot" style="--acc:var(--white)">{{ section.settings.eyebrow }}</p>
+      <h2 class="display">{{ section.settings.heading }} <em>{{ section.settings.heading_em }}</em></h2>
+      <p class="lead">{{ section.settings.lead }}</p>
+      {%- if section.settings.btn != blank -%}<div><a class="btn btn-ghost" href="{{ section.settings.btn_link | default: '/pages/our-story' }}">{{ section.settings.btn }} <span class="arr">→</span></a></div>{%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Founder story",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Small label", "default": "Our story" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Confidence isn't sprayed on." },
+    { "type": "text", "id": "heading_em", "label": "Heading (italic)", "default": "It's built into your routine." },
+    { "type": "textarea", "id": "lead", "label": "Text", "default": "Adam started Extract Labs after a trip to Morocco, where oils are part of everyday life. Back in Brisbane he began blending his own, using argan and jojoba as the foundation. Every bottle is still made by hand in his home studio." },
+    { "type": "image_picker", "id": "image", "label": "Photo", "info": "Leave empty to use the built-in sunset photo." },
+    { "type": "text", "id": "image_alt", "label": "Photo description", "default": "Silhouette holding a roll-on bottle against a Brisbane sunset" },
+    { "type": "text", "id": "btn", "label": "Button", "default": "Meet the founder" },
+    { "type": "url", "id": "btn_link", "label": "Button link" }
+  ],
+  "presets": [{ "name": "Founder story" }]
+}
+{% endschema %}

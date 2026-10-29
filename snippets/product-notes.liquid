@@ -1,0 +1,35 @@
+{%- comment -%}
+  Scent notes for a product, as a list joined by `sep`.
+  Uses the custom.scent_notes metafield if set (comma or • separated),
+  otherwise the first paragraph of the description when it is a "Note • Note • Note" line.
+{%- endcomment -%}
+{%- liquid
+  assign sep = sep | default: ' · '
+  assign raw = product.metafields.custom.scent_notes.value | default: ''
+  if raw == ''
+    assign first_p = product.description | split: '</p>' | first | strip_html | strip
+    if first_p contains '•'
+      assign raw = first_p
+    endif
+  endif
+  assign raw = raw | replace: ',', '•' | replace: '&amp;', '&'
+  assign notes = raw | split: '•'
+  assign out = ''
+  for n in notes
+    assign t = n | strip
+    if t != ''
+      if out != ''
+        assign out = out | append: '|'
+      endif
+      assign out = out | append: t
+    endif
+  endfor
+  assign list = out | split: '|'
+  if as_chips
+    for n in list
+      echo '<span>' | append: n | append: '</span>'
+    endfor
+  else
+    echo list | join: sep
+  endif
+-%}

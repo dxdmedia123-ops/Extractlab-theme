@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#050506">
+    <link rel="canonical" href="{{ canonical_url }}">
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 64, height: 64 }}">
+    {%- endif -%}
+    <title>
+      {{- page_title -}}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+    {% render 'social-meta' %}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Hepta+Slab:wght@400;600;700&family=Montserrat:wght@800;900&display=swap">
+
+    {{ 'site.css' | asset_url | stylesheet_tag }}
+    {{ 'theme-extra.css' | asset_url | stylesheet_tag }}
+
+    <script>
+      window.EL = {
+        root: {{ routes.root_url | json }},
+        cartUrl: {{ routes.cart_url | json }},
+        cartAdd: {{ routes.cart_add_url | json }},
+        cartChange: {{ routes.cart_change_url | json }},
+        shopUrl: {{ routes.all_products_collection_url | json }},
+        moneyFormat: {{ shop.money_format | json }},
+        freeShip: {{ settings.free_shipping_threshold | default: 99 | times: 100 }},
+        bundleQty: {{ settings.bundle_qty | default: 6 }},
+        bundleText: {{ settings.bundle_text | default: 'bundle savings of up to 15%' | json }}
+      };
+    </script>
+    <script src="{{ 'app.js' | asset_url }}" defer></script>
+
+    {{ content_for_header }}
+  </head>
+
+  <body class="template-{{ template.name }}{% if template.suffix %} template-{{ template.name }}-{{ template.suffix }}{% endif %}">
+    <a class="sr skip" href="#MainContent">Skip to content</a>
+    {% sections 'header-group' %}
+
+    <main id="MainContent" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% sections 'footer-group' %}
+    {% render 'cart-drawer' %}
+    <div class="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+<section class="page-hero"><div class="wrap"><p class="eyebrow dot" style="--acc:var(--white)">{{ article.published_at | date: '%d %b %Y' }}</p><h1 class="display" style="font-size:clamp(40px,6vw,80px)">{{ article.title }}</h1></div></section>
+<section class="sec" style="padding-top:10px"><div class="wrap"><div class="prose rte">{{ article.content }}</div></div></section>
+{% schema %}
+{ "name": "Article", "settings": [] }
+{% endschema %}

@@ -1,0 +1,292 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "btn1_link": "shopify://collections/all",
+        "btn2_link": "shopify://collections/aura"
+      }
+    },
+    "strip": {
+      "type": "collection-strip",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "collection": "black-noir-collection",
+            "label": "Black Noir",
+            "accent": "noir"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "collection": "white-extract-collection",
+            "label": "White Extract",
+            "accent": "white"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "collection": "tropic-thunder-collection",
+            "label": "Tropic Thunder",
+            "accent": "tropic"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "collection": "pink-sapphire-collection",
+            "label": "Pink Sapphire",
+            "accent": "pink"
+          }
+        },
+        "item_5": {
+          "type": "item",
+          "settings": {
+            "collection": "aura",
+            "label": "Aura oils",
+            "accent": "aura"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5"
+      ]
+    },
+    "cards": {
+      "type": "collection-cards",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "collection": "black-noir-collection",
+            "title": "Black Noir",
+            "price_label": "From $17.99",
+            "text": "Dark, bold, unforgettable. Leather, oud, smoky amber.",
+            "accent": "noir",
+            "asset": "set_noir.jpg"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "collection": "white-extract-collection",
+            "title": "White Extract",
+            "price_label": "From $17.99",
+            "text": "Clean and refined. Pineapple, citrus, cedar, oud.",
+            "accent": "white",
+            "asset": "white_lineup.jpg"
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "collection": "tropic-thunder-collection",
+            "title": "Tropic Thunder",
+            "price_label": "From $17.99",
+            "text": "Bottled sunshine. Blueberry, watermelon, honey.",
+            "accent": "tropic",
+            "asset": "drive_tropic.jpg"
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "collection": "pink-sapphire-collection",
+            "title": "Pink Sapphire",
+            "price_label": "From $17.99",
+            "text": "Sweet and addictive. Vanilla, coconut, peach.",
+            "accent": "pink",
+            "asset": "set_pink.jpg"
+          }
+        },
+        "card_5": {
+          "type": "card",
+          "settings": {
+            "collection": "aura",
+            "title": "Aura",
+            "price_label": "Now $25",
+            "text": "Beard and hair oils with argan and jojoba.",
+            "accent": "aura",
+            "asset": "drive_aura.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4",
+        "card_5"
+      ]
+    },
+    "best": {
+      "type": "featured-products",
+      "settings": {
+        "products": [
+          "the-main-man-perfume-oil",
+          "the-dark-knight-perfume-oil",
+          "captain-moonlite-perfume-oil",
+          "white-noise-perfume-oil",
+          "watermelon-crush-perfume-oil",
+          "coco-lush-inspired-by-kayali-utopia-vanilla-coco-21-perfume-oil-copy",
+          "cloud-nine-inspired-by-ariana-grande-cloud-perfume-oil",
+          "vanilla-veil"
+        ],
+        "btn_link": "shopify://collections/all"
+      }
+    },
+    "versus": {
+      "type": "versus",
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Alcohol-free formula"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Nourishing oil base"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Handmade in small batches"
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "Under $20 a bottle"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4"
+      ],
+      "settings": {
+        "btn_link": "shopify://collections/all"
+      }
+    },
+    "sets": {
+      "type": "discovery-sets",
+      "settings": {
+        "products": [
+          "sweet-addictive-discovery-set",
+          "fresh-clean-discovery-set",
+          "dark-bold-discovery-set",
+          "fruity-tropical-discovery-set",
+          "smooth-sophisticated-discovery-set",
+          "oud-mood-discovery-set"
+        ],
+        "collection": "discovery-perfume-oil-sets"
+      }
+    },
+    "reviews": {
+      "type": "reviews",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "asset": "rev1.jpg",
+            "alt": "Customer trying Vanilla Veil beard oil",
+            "quote": "It's not easy to tame this lion's mane but now I can Alhamdullilah.",
+            "name": "Adam Ismail",
+            "product": "Vanilla Veil beard oil",
+            "link": "https://www.instagram.com/reel/DVjfOUzEvOX/"
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "asset": "rev2.jpg",
+            "alt": "Customer testing Captain Moonlite",
+            "quote": "This smells exactly like Ombre Nomad from Lois Vuitton.",
+            "name": "Ibrahim A.",
+            "product": "Captain Moonlite",
+            "link": "https://www.instagram.com/reel/DYGKpLLyaeN/"
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "asset": "rev3.jpg",
+            "alt": "Customer smelling Somber Mood",
+            "quote": "That's great, love it, don't know what it is but it is GOOD.",
+            "name": "Andy",
+            "product": "Somber Mood",
+            "link": "https://www.instagram.com/reel/DYQ3SfdKnqU/"
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "asset": "rev4.jpg",
+            "alt": "Customer trying Watermelon Crush on her wrist",
+            "quote": "Mmm, that's really nice, great for summer!",
+            "name": "Arabelle",
+            "product": "Watermelon Crush",
+            "link": "https://www.instagram.com/reel/DYD6ddDKHys/"
+          }
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {
+            "asset": "rev5.jpg",
+            "alt": "Customer trying Classic Sandalwood beard oil",
+            "quote": "Sandalwoods a banger!",
+            "name": "Luqmaan A.",
+            "product": "Classic Sandalwood beard oil",
+            "link": "https://www.instagram.com/reel/DWsUm80kuSo/"
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5"
+      ]
+    },
+    "founder": {
+      "type": "founder",
+      "settings": {
+        "btn_link": "shopify://pages/our-story"
+      }
+    },
+    "band": {
+      "type": "store-band",
+      "settings": {
+        "btn_link": "shopify://pages/our-story"
+      }
+    },
+    "news": {
+      "type": "newsletter"
+    }
+  },
+  "order": [
+    "hero",
+    "strip",
+    "cards",
+    "best",
+    "versus",
+    "sets",
+    "reviews",
+    "founder",
+    "band",
+    "news"
+  ]
+}

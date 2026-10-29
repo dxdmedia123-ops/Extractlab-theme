@@ -1,0 +1,51 @@
+<section class="versus sec"{% if section.settings.anchor != blank %} id="{{ section.settings.anchor }}"{% endif %}>
+  <div class="wrap">
+    <div class="art">{% render 'pic', image: section.settings.image, asset: 'spectre.jpg', alt: section.settings.image_alt %}</div>
+    <div class="vs-copy">
+      <p class="eyebrow dot" style="--acc:var(--white)">{{ section.settings.eyebrow }}</p>
+      <h2 class="display">{{ section.settings.heading }}<br><em>{{ section.settings.heading_em }}</em></h2>
+      <p class="lead">{{ section.settings.lead }}</p>
+      <div class="table" role="table" aria-label="{{ section.settings.col_us | escape }} compared with {{ section.settings.col_them | escape }}">
+        <div class="hl" aria-hidden="true"></div>
+        <div class="tr th" role="row"><div role="columnheader"></div><div class="o" role="columnheader">{{ section.settings.col_us }}</div><div class="t" role="columnheader">{{ section.settings.col_them }}</div></div>
+        {%- for block in section.blocks -%}
+          <div class="tr" role="row" {{ block.shopify_attributes }}>
+            <div class="l" role="cell">{{ block.settings.label }}</div>
+            <div class="o" role="cell"><span class="yes" aria-label="Yes">✓</span></div>
+            <div class="t" role="cell"><span class="no" aria-label="No">✕</span></div>
+          </div>
+        {%- endfor -%}
+      </div>
+      {%- if section.settings.btn != blank -%}<div><a class="btn btn-holo" href="{{ section.settings.btn_link | default: routes.all_products_collection_url }}">{{ section.settings.btn }} <span class="arr">→</span></a></div>{%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Comparison",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Small label", "default": "Why oil?" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Ditch the alcohol." },
+    { "type": "text", "id": "heading_em", "label": "Heading (italic)", "default": "Keep the scent." },
+    { "type": "textarea", "id": "lead", "label": "Intro", "default": "Alcohol sprays flash off fast and can dry your skin. Oil sits close and stays. A little goes a long way, so one 9ml bottle can last for months." },
+    { "type": "text", "id": "col_us", "label": "Our column", "default": "Extract Lab" },
+    { "type": "text", "id": "col_them", "label": "Their column", "default": "Alcohol sprays" },
+    { "type": "image_picker", "id": "image", "label": "Photo", "info": "Leave empty to use the built-in Spectre photo." },
+    { "type": "text", "id": "image_alt", "label": "Photo description", "default": "Spectre perfume oil standing in a misty forest" },
+    { "type": "text", "id": "btn", "label": "Button", "default": "Find your scent" },
+    { "type": "url", "id": "btn_link", "label": "Button link" },
+    { "type": "text", "id": "anchor", "label": "Anchor ID (optional)" }
+  ],
+  "blocks": [
+    { "type": "row", "name": "Row", "settings": [ { "type": "text", "id": "label", "label": "Label", "default": "Alcohol-free formula" } ] }
+  ],
+  "presets": [{ "name": "Comparison", "blocks": [
+    { "type": "row", "settings": { "label": "Alcohol-free formula" } },
+    { "type": "row", "settings": { "label": "Nourishing oil base" } },
+    { "type": "row", "settings": { "label": "Handmade in small batches" } },
+    { "type": "row", "settings": { "label": "Under $20 a bottle" } }
+  ] }]
+}
+{% endschema %}

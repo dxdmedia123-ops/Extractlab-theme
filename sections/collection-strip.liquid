@@ -1,0 +1,35 @@
+<nav class="range" aria-label="Collections">
+  <div class="wrap">
+    {%- for block in section.blocks -%}
+      {%- capture acc -%}{% render 'accent-var', key: block.settings.accent %}{%- endcapture -%}
+      {%- assign asset = 'cut_' | append: block.settings.accent | append: '.png' -%}
+      <a href="{{ block.settings.collection.url | default: routes.all_products_collection_url }}" style="--acc:{{ acc }}" {{ block.shopify_attributes }}>
+        {% render 'pic', image: block.settings.image, asset: asset, alt: '', sizes: '120px' %}
+        <span>{{ block.settings.label | replace: ' ', '<br class="m-br"> ' }}</span>
+      </a>
+    {%- endfor -%}
+  </div>
+</nav>
+
+{% schema %}
+{
+  "name": "Collection bottles",
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Collection",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Black Noir" },
+        { "type": "select", "id": "accent", "label": "Colour", "default": "noir", "options": [
+          { "value": "noir", "label": "Black Noir (silver)" }, { "value": "white", "label": "White Extract (gold)" },
+          { "value": "tropic", "label": "Tropic Thunder (lime)" }, { "value": "pink", "label": "Pink Sapphire (pink)" },
+          { "value": "aura", "label": "Aura (green)" }, { "value": "sets", "label": "Sets (lilac)" } ] },
+        { "type": "image_picker", "id": "image", "label": "Bottle cut-out (transparent PNG)", "info": "Leave empty to use the built-in bottle for this colour." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Collection bottles" }]
+}
+{% endschema %}

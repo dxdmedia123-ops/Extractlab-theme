@@ -1,0 +1,24 @@
+<section class="store"{% if section.settings.margin_top > 0 %} style="margin-top:{{ section.settings.margin_top }}px"{% endif %}>
+  <div class="wrap">
+    <p class="punch">{{ section.settings.heading }} <em>{{ section.settings.heading_em }}</em></p>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      {%- if section.settings.sub != blank -%}<span style="color:var(--muted);max-width:44ch">{{ section.settings.sub }}</span>{%- endif -%}
+      {%- if section.settings.btn != blank -%}<a class="btn btn-ghost" href="{{ section.settings.btn_link | default: '/pages/our-story#visit' }}">{{ section.settings.btn }} <span class="arr">→</span></a>{%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Banner strip",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "In Brisbane?" },
+    { "type": "text", "id": "heading_em", "label": "Heading (holographic)", "default": "Refills $15." },
+    { "type": "text", "id": "sub", "label": "Small text", "default": "Queen St Mall · Uptown, Level Q" },
+    { "type": "text", "id": "btn", "label": "Button", "default": "Visit the store" },
+    { "type": "url", "id": "btn_link", "label": "Button link" },
+    { "type": "range", "id": "margin_top", "label": "Space above", "min": 0, "max": 120, "step": 10, "unit": "px", "default": 0 }
+  ],
+  "presets": [{ "name": "Banner strip" }]
+}
+{% endschema %}

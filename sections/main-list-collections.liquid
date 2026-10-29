@@ -1,0 +1,25 @@
+<section class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow dot" style="--acc:var(--white)">Collections</p>
+    <h1 class="display" style="font-size:clamp(40px,6vw,80px)">Find your <em>signature.</em></h1>
+  </div>
+</section>
+<section class="sec" style="padding-top:10px">
+  <div class="wrap">
+    <div class="colls">
+      {%- for c in collections -%}
+        {%- if c.products_count > 0 and c.handle != 'all' -%}
+          <a class="coll" href="{{ c.url }}">
+            <div class="ph">{%- if c.featured_image -%}{{ c.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}</div>
+            <span class="from">{{ c.products_count }} products</span>
+            <h3>{{ c.title }}</h3>
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Collections list", "settings": [] }
+{% endschema %}

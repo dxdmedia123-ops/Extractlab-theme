@@ -1,0 +1,29 @@
+{%- comment -%} Built-in theme image with intrinsic size. Params: asset, alt, loading, class {%- endcomment -%}
+{%- assign w = 1200 -%}{%- assign h = 1200 -%}
+{%- case asset -%}
+  {%- when 'babayaga.jpg' -%}{%- assign w = 1200 -%}{%- assign h = 805 -%}
+  {%- when 'collections.jpg' -%}{%- assign w = 1100 -%}{%- assign h = 1100 -%}
+  {%- when 'cut_aura.png' -%}{%- assign w = 124 -%}{%- assign h = 420 -%}
+  {%- when 'cut_noir.png' -%}{%- assign w = 99 -%}{%- assign h = 420 -%}
+  {%- when 'cut_pink.png' -%}{%- assign w = 98 -%}{%- assign h = 420 -%}
+  {%- when 'cut_tropic.png' -%}{%- assign w = 99 -%}{%- assign h = 420 -%}
+  {%- when 'cut_white.png' -%}{%- assign w = 93 -%}{%- assign h = 420 -%}
+  {%- when 'drive_aura.jpg' -%}{%- assign w = 1200 -%}{%- assign h = 675 -%}
+  {%- when 'drive_aurabox.jpg' -%}{%- assign w = 675 -%}{%- assign h = 1200 -%}
+  {%- when 'drive_moonlite.jpg' -%}{%- assign w = 800 -%}{%- assign h = 1200 -%}
+  {%- when 'drive_tropic.jpg' -%}{%- assign w = 800 -%}{%- assign h = 1200 -%}
+  {%- when 'hero.jpg' -%}{%- assign w = 733 -%}{%- assign h = 1100 -%}
+  {%- when 'knightfall.jpg' -%}{%- assign w = 805 -%}{%- assign h = 1200 -%}
+  {%- when 'rev1.jpg' -%}{%- assign w = 1100 -%}{%- assign h = 1100 -%}
+  {%- when 'rev2.jpg' -%}{%- assign w = 1100 -%}{%- assign h = 1100 -%}
+  {%- when 'rev3.jpg' -%}{%- assign w = 685 -%}{%- assign h = 685 -%}
+  {%- when 'rev4.jpg' -%}{%- assign w = 1100 -%}{%- assign h = 1100 -%}
+  {%- when 'rev5.jpg' -%}{%- assign w = 1100 -%}{%- assign h = 1100 -%}
+  {%- when 'set_noir.jpg' -%}{%- assign w = 733 -%}{%- assign h = 1100 -%}
+  {%- when 'set_pink.jpg' -%}{%- assign w = 1100 -%}{%- assign h = 619 -%}
+  {%- when 'set_smooth.jpg' -%}{%- assign w = 1100 -%}{%- assign h = 825 -%}
+  {%- when 'spectre.jpg' -%}{%- assign w = 1200 -%}{%- assign h = 800 -%}
+  {%- when 'white_lineup.jpg' -%}{%- assign w = 933 -%}{%- assign h = 1400 -%}
+  {%- when 'wordmark.png' -%}{%- assign w = 1058 -%}{%- assign h = 726 -%}
+{%- endcase -%}
+<img src="{{ asset | asset_url }}" alt="{{ alt | escape }}" width="{{ w }}" height="{{ h }}" loading="{{ loading | default: 'lazy' }}"{% if class != blank %} class="{{ class }}"{% endif %}>

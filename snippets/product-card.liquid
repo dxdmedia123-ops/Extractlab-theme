@@ -1,0 +1,40 @@
+{%- comment -%}
+  Product card. Params: product (required), loading ('lazy' default)
+{%- endcomment -%}
+{%- capture key -%}{% render 'accent-key', product: product %}{%- endcapture -%}
+{%- capture acc -%}{% render 'accent-var', key: key %}{%- endcapture -%}
+{%- capture cname -%}{% render 'accent-name', key: key %}{%- endcapture -%}
+{%- capture notes -%}{% render 'product-notes', product: product %}{%- endcapture -%}
+{%- liquid
+  assign off = 0
+  if product.compare_at_price > product.price
+    assign diff = product.compare_at_price | minus: product.price | times: 100.0
+    assign off = diff | divided_by: product.compare_at_price | round
+  endif
+  assign v = product.selected_or_first_available_variant
+  assign lz = loading | default: 'lazy'
+  assign img_alt = product.featured_media.alt | default: product.title | escape
+-%}
+<article class="pcard" style="--acc:{{ acc }}">
+  <a class="pimg" href="{{ product.url }}">
+    {%- if product.featured_media -%}
+      {{ product.featured_media | image_url: width: 900 | image_tag: loading: lz, widths: '360, 540, 720, 900', sizes: '(min-width: 1000px) 25vw, (min-width: 700px) 33vw, 50vw', alt: img_alt }}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+    {%- endif -%}
+    {%- if off > 0 -%}<span class="tag save">Save {{ off }}%</span>{%- elsif product.available == false -%}<span class="tag">Sold out</span>{%- endif -%}
+  </a>
+  <span class="meta">{{ cname }}</span>
+  <h3><a href="{{ product.url }}">{{ product.title | split: ' | ' | first }}</a></h3>
+  {%- if notes != blank -%}<p class="notes">{{ notes }}</p>{%- endif -%}
+  <div class="row">
+    <span class="price">{{ product.price | money }}{%- if product.compare_at_price > product.price -%}<s>{{ product.compare_at_price | money }}</s>{%- endif -%}</span>
+    {%- if product.available == false -%}
+      <span class="add" aria-disabled="true" style="opacity:.5;display:inline-grid;place-items:center">Sold out</span>
+    {%- elsif product.has_only_default_variant -%}
+      <button class="add" type="button" data-add="{{ v.id }}" data-title="{{ product.title | split: ' | ' | first | escape }}" aria-label="Add {{ product.title | escape }} to bag">Add</button>
+    {%- else -%}
+      <a class="add" href="{{ product.url }}" style="display:inline-grid;place-items:center;text-decoration:none">Choose</a>
+    {%- endif -%}
+  </div>
+</article>

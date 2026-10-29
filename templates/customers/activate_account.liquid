@@ -1,0 +1,9 @@
+<section class="page-hero"><div class="wrap" style="max-width:520px">
+  <h1 class="display" style="font-size:clamp(40px,6vw,72px)">Activate your <em>account.</em></h1>
+  {%- form 'activate_customer_password', class: 'form', style: 'grid-template-columns:1fr' -%}
+    {%- if form.errors -%}<p class="form-msg" role="alert">{{ form.errors | default_errors }}</p>{%- endif -%}
+    <label class="sr" for="ap1">Password</label><input class="field" id="ap1" type="password" name="customer[password]" placeholder="Password" autocomplete="new-password">
+    <label class="sr" for="ap2">Confirm</label><input class="field" id="ap2" type="password" name="customer[password_confirmation]" placeholder="Confirm password" autocomplete="new-password">
+    <button class="btn btn-holo" type="submit" name="activate">Activate</button>
+  {%- endform -%}
+</div></section>

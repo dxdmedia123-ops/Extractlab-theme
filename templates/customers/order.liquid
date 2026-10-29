@@ -1,0 +1,18 @@
+<section class="page-hero"><div class="wrap">
+  <p class="eyebrow"><a href="{{ routes.account_url }}">← Account</a></p>
+  <h1 class="display" style="font-size:clamp(40px,6vw,72px)">Order <em>{{ order.name }}</em></h1>
+  <p class="lead">{{ order.created_at | date: '%d %b %Y' }} · {{ order.financial_status_label }} · {{ order.fulfillment_status_label }}</p>
+</div></section>
+<section class="sec" style="padding-top:10px"><div class="wrap">
+  <div class="lines">
+    {%- for item in order.line_items -%}
+      <div class="line" style="grid-template-columns:1fr auto auto"><div><h5>{{ item.title }}</h5>{%- if item.fulfillment -%}<small>{{ item.fulfillment.tracking_company }} {{ item.fulfillment.tracking_number }}</small>{%- endif -%}</div><small>× {{ item.quantity }}</small><div class="price">{{ item.final_line_price | money }}</div></div>
+    {%- endfor -%}
+  </div>
+  <div class="drawer-foot" style="max-width:420px;margin-left:auto">
+    <div class="sub"><span>Subtotal</span><b>{{ order.line_items_subtotal_price | money }}</b></div>
+    {%- for s in order.shipping_methods -%}<div class="sub"><span>Shipping ({{ s.title }})</span><b>{{ s.price | money }}</b></div>{%- endfor -%}
+    <div class="sub"><span>Total</span><b>{{ order.total_price | money }}</b></div>
+  </div>
+  {%- if order.shipping_address -%}<h3 style="margin-top:30px">Shipping to</h3><p class="lead">{{ order.shipping_address | format_address }}</p>{%- endif -%}
+</div></section>
