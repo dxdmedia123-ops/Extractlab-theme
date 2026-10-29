@@ -130,16 +130,19 @@
       "type": "featured-products",
       "settings": {
         "products": [
-          "the-main-man-perfume-oil",
-          "the-dark-knight-perfume-oil",
-          "captain-moonlite-perfume-oil",
-          "white-noise-perfume-oil",
-          "watermelon-crush-perfume-oil",
+          "burnt-sugar-perfume-oil",
           "coco-lush-inspired-by-kayali-utopia-vanilla-coco-21-perfume-oil-copy",
           "cloud-nine-inspired-by-ariana-grande-cloud-perfume-oil",
+          "pink-rush-perfume-oil",
+          "just-peachy-perfume-oil",
+          "sweet-addictive-discovery-set",
+          "right-on-the-honey-perfume-oil",
+          "spectre-perfume-oil",
+          "the-dark-knight-perfume-oil",
           "vanilla-veil"
         ],
-        "btn_link": "shopify://collections/all"
+        "btn_link": "shopify://collections/all",
+        "limit": 10
       }
     },
     "versus": {
