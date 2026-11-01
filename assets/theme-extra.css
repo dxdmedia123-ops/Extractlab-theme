@@ -63,13 +63,13 @@ a.chip-btn{text-decoration:none}
 .unlock-card .sub{display:block;font-size:15px;color:var(--muted);margin:0 0 6px;max-width:30ch}
 .unlock-card .eyebrow{color:var(--muted)}
 .unlock-card .btn{width:100%;height:52px}
-.unlock .seal{position:relative;width:118px;height:118px;border-radius:50%;background:var(--holo);display:grid;place-content:center;color:var(--ink);box-shadow:0 0 0 6px var(--bg2),0 0 0 7.5px rgba(212,198,248,.5),0 16px 40px rgba(190,170,245,.35);margin-bottom:6px;animation:seal .7s cubic-bezier(.2,1.6,.4,1) both,glint 2.4s ease-in-out .7s infinite}
-.unlock .seal b{font-family:var(--punch);font-weight:900;font-size:38px;line-height:.9;letter-spacing:-.02em}
-.unlock .seal span{font-family:var(--punch);font-weight:900;font-size:14px;letter-spacing:.3em;margin-left:.3em}
-.unlock .burst{position:absolute;left:50%;top:93px;width:0;height:0;pointer-events:none}
+.unlock .seal{position:relative;width:164px;height:164px;border-radius:50%;background:#0b0b0c;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2px;box-shadow:0 0 0 5px rgba(255,255,255,.75),0 0 0 6px rgba(212,198,248,.35),0 16px 40px rgba(0,0,0,.45),0 0 40px rgba(190,170,245,.25);margin:4px 0 10px;transform:rotate(-6deg);animation:seal .7s cubic-bezier(.2,1.6,.4,1) both}
+.unlock .seal small{font-family:var(--body);font-weight:600;font-size:11px;letter-spacing:.12em;text-transform:uppercase;line-height:1;margin-left:.12em}
+.unlock .seal b{font-family:var(--display);font-weight:500;font-variation-settings:"opsz" 144;font-size:60px;line-height:.95;letter-spacing:-.02em;background:var(--holo);-webkit-background-clip:text;background-clip:text;color:transparent;padding:0 .04em}
+.unlock .seal span{font-family:var(--body);font-weight:600;font-size:11px;letter-spacing:.32em;text-transform:uppercase;line-height:1;margin-left:.32em}
+.unlock .burst{position:absolute;left:50%;top:120px;width:0;height:0;pointer-events:none}
 .unlock .burst i{position:absolute;width:9px;height:14px;border-radius:2px;background:var(--c);opacity:0;animation:pop 1.1s cubic-bezier(.15,.8,.3,1) var(--d) forwards}
 .unlock .burst i:nth-child(3n){width:8px;height:8px;border-radius:50%}
-@keyframes seal{0%{transform:scale(.2) rotate(-25deg);opacity:0}100%{transform:none;opacity:1}}
-@keyframes glint{0%,100%{filter:brightness(1)}50%{filter:brightness(1.12) saturate(1.2)}}
+@keyframes seal{0%{transform:scale(.2) rotate(-30deg);opacity:0}100%{transform:rotate(-6deg);opacity:1}}
 @keyframes pop{0%{transform:translate(0,0) rotate(0) scale(.6);opacity:1}80%{opacity:1}100%{transform:translate(var(--x),calc(var(--y) + 40px)) rotate(var(--r)) scale(1);opacity:0}}
 @media (prefers-reduced-motion:reduce){.unlock .seal{animation:none}.unlock-card{transition:none}}

@@ -108,7 +108,7 @@
     }
     el.innerHTML = `<div class="unlock-card">
         <div class="burst" aria-hidden="true">${bits}</div>
-        <div class="seal" aria-hidden="true"><b>${tier.pct}%</b><span>OFF</span></div>
+        <div class="seal" aria-hidden="true"><small>Congratulations!</small><b>${tier.pct}%</b><span>Off</span></div>
         <p class="eyebrow">Bundle unlocked</p>
         <h3>You've saved <em>${tier.pct}%</em></h3>
         <p class="sub">${tier.qty}+ items in your bag, so ${tier.pct}% comes off automatically.${next ? ` Get to ${next.qty} items for ${next.pct}% off.` : ""}</p>
