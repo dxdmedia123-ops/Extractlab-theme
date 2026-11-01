@@ -67,7 +67,7 @@
           "settings": {
             "collection": "black-noir-collection",
             "title": "Black Noir",
-            "price_label": "From $17.99",
+            "price_label": "From $19.79",
             "text": "Dark, bold, unforgettable. Leather, oud, smoky amber.",
             "accent": "noir",
             "asset": "set_noir.jpg"
@@ -78,7 +78,7 @@
           "settings": {
             "collection": "white-extract-collection",
             "title": "White Extract",
-            "price_label": "From $17.99",
+            "price_label": "From $19.79",
             "text": "Clean and refined. Pineapple, citrus, cedar, oud.",
             "accent": "white",
             "asset": "white_lineup.jpg"
@@ -89,7 +89,7 @@
           "settings": {
             "collection": "tropic-thunder-collection",
             "title": "Tropic Thunder",
-            "price_label": "From $17.99",
+            "price_label": "From $19.79",
             "text": "Bottled sunshine. Blueberry, watermelon, honey.",
             "accent": "tropic",
             "asset": "drive_tropic.jpg"
@@ -100,7 +100,7 @@
           "settings": {
             "collection": "pink-sapphire-collection",
             "title": "Pink Sapphire",
-            "price_label": "From $17.99",
+            "price_label": "From $19.79",
             "text": "Sweet and addictive. Vanilla, coconut, peach.",
             "accent": "pink",
             "asset": "set_pink.jpg"
@@ -111,7 +111,7 @@
           "settings": {
             "collection": "aura",
             "title": "Aura",
-            "price_label": "Now $25",
+            "price_label": "Now $27.50",
             "text": "Beard and hair oils with argan and jojoba.",
             "accent": "aura",
             "asset": "drive_aura.jpg"
