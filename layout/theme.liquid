@@ -35,8 +35,11 @@
         shopUrl: {{ routes.all_products_collection_url | json }},
         moneyFormat: {{ shop.money_format | json }},
         freeShip: {{ settings.free_shipping_threshold | default: 99 | times: 100 }},
-        bundleQty: {{ settings.bundle_qty | default: 6 }},
-        bundleText: {{ settings.bundle_text | default: 'bundle savings of up to 15%' | json }}
+        tiers: [
+          { qty: {{ settings.tier1_qty | default: 3 }}, pct: {{ settings.tier1_pct | default: 10 }} },
+          { qty: {{ settings.tier2_qty | default: 6 }}, pct: {{ settings.tier2_pct | default: 15 }} }
+        ],
+        celebrate: {{ settings.bundle_celebrate | json }}
       };
     </script>
     <script src="{{ 'app.js' | asset_url }}" defer></script>

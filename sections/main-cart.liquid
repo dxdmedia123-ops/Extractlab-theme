@@ -20,16 +20,31 @@
                   <input class="field" style="height:44px;width:90px;flex:none" id="u-{{ item.key }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0">
                 </div>
               </div>
-              <div class="price">{{ item.final_line_price | money }}</div>
+              <div class="price">{%- if item.original_line_price > item.final_line_price -%}<s>{{ item.original_line_price | money }}</s>{%- endif -%}{{ item.final_line_price | money }}</div>
             </div>
           {%- endfor -%}
         </div>
         <div class="drawer-foot" style="max-width:440px;margin-left:auto">
-          <div class="sub"><span>Subtotal</span><b>{{ cart.total_price | money }}</b></div>
+          {%- liquid
+            assign n = cart.item_count
+            assign t1q = settings.tier1_qty | default: 3
+            assign t1p = settings.tier1_pct | default: 10
+            assign t2q = settings.tier2_qty | default: 6
+            assign t2p = settings.tier2_pct | default: 15
+          -%}
+          <p class="meter bundle-meter" style="margin:0">
+            {%- if n >= t2q -%}<b class="unlocked">{{ t2p }}% off unlocked</b> · your bundle discount is applied.
+            {%- elsif n >= t1q -%}<b class="unlocked">{{ t1p }}% off unlocked</b> · add <b>{{ t2q | minus: n }} more</b> for {{ t2p }}% off.
+            {%- else -%}Add <b>{{ t1q | minus: n }} more</b> to save <b>{{ t1p }}%</b> on your order.{%- endif -%}
+          </p>
+          {%- if cart.total_discount > 0 -%}
+            <div class="sub saved-row"><span>Bundle discount</span><b>−{{ cart.total_discount | money }}</b></div>
+          {%- endif -%}
+          <div class="sub"><span>Subtotal</span><b>{%- if cart.total_discount > 0 -%}<s>{{ cart.original_total_price | money }}</s> {% endif -%}{{ cart.total_price | money }}</b></div>
           <button class="btn btn-ghost" type="submit" name="update">Update bag</button>
           <button class="btn btn-holo" type="submit" name="checkout">Checkout <span class="arr">→</span></button>
           {%- if additional_checkout_buttons -%}<div class="express-pay">{{ content_for_additional_checkout_buttons }}</div>{%- endif -%}
-          <p class="fine">Bundle savings and delivery are calculated at checkout.</p>
+          <p class="fine">Buy 3, save 10% · Buy 6+, save 15%. Applied automatically. Delivery is calculated at checkout.</p>
         </div>
       </form>
     {%- else -%}

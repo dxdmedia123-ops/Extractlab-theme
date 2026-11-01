@@ -1,1 +1,94 @@
-[]
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Extract Labs — Holo",
+    "theme_version": "1.0.0",
+    "theme_author": "DXD Media",
+    "theme_documentation_url": "https://extractlab.com.au",
+    "theme_support_url": "https://extractlab.com.au/pages/contact"
+  },
+  {
+    "name": "Store",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      },
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Free delivery threshold ($)",
+        "default": 99,
+        "info": "Used for the progress bar in the bag. Set the real free-shipping rate in Settings → Shipping."
+      },
+      {
+        "type": "header",
+        "content": "Bundle discount (bag messaging)"
+      },
+      {
+        "type": "paragraph",
+        "content": "These control the bag progress bar and unlock animation. The discounts themselves are set in Shopify admin → Discounts, so keep them in step."
+      },
+      {
+        "type": "number",
+        "id": "tier1_qty",
+        "label": "Tier 1: items needed",
+        "default": 3
+      },
+      {
+        "type": "number",
+        "id": "tier1_pct",
+        "label": "Tier 1: % off",
+        "default": 10
+      },
+      {
+        "type": "number",
+        "id": "tier2_qty",
+        "label": "Tier 2: items needed",
+        "default": 6
+      },
+      {
+        "type": "number",
+        "id": "tier2_pct",
+        "label": "Tier 2: % off",
+        "default": 15
+      },
+      {
+        "type": "checkbox",
+        "id": "bundle_celebrate",
+        "label": "Show unlock animation",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "contact_email",
+        "label": "Contact email",
+        "default": "admin@extractlab.com.au"
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram",
+        "default": "https://www.instagram.com/extractlabs_au/"
+      },
+      {
+        "type": "url",
+        "id": "social_tiktok",
+        "label": "TikTok",
+        "default": "https://www.tiktok.com/@extract.lab"
+      },
+      {
+        "type": "url",
+        "id": "social_facebook",
+        "label": "Facebook",
+        "default": "https://www.facebook.com/share/1GMhGDq3Z1/"
+      }
+    ]
+  }
+]

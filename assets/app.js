@@ -37,28 +37,88 @@
     return j;
   }
 
+  /* ---------- bundle tiers ---------- */
+  const TIERS = (C.tiers || [{ qty: 3, pct: 10 }, { qty: 6, pct: 15 }]).filter(t => t.qty > 0).sort((a, b) => a.qty - b.qty);
+  const tierFor = n => TIERS.reduce((acc, t, i) => (n >= t.qty ? i + 1 : acc), 0); // 0 = none, 1 = first tier...
+  const store = { get: k => { try { return sessionStorage.getItem(k); } catch (_) { return null; } }, set: (k, v) => { try { sessionStorage.setItem(k, v); } catch (_) {} } };
+  let shownTier = 0;
+
+  function bundleState(n) {
+    const t = tierFor(n), next = TIERS[t], cur = TIERS[t - 1];
+    let msg;
+    if (!cur) msg = `Add <b>${next.qty - n} more</b> to save <b>${next.pct}%</b> on your order.`;
+    else if (next) msg = `<b class="unlocked">${cur.pct}% off unlocked</b> · add <b>${next.qty - n} more</b> for ${next.pct}% off.`;
+    else msg = `<b class="unlocked">${cur.pct}% off unlocked</b> · your bundle discount is applied.`;
+    const max = TIERS[TIERS.length - 1].qty;
+    return { t, msg, width: Math.min(100, (n / max) * 100) };
+  }
+
   function renderBag(cart) {
     $$("[data-bag-count]").forEach(e => (e.textContent = cart.item_count));
+    const n = cart.item_count, b = bundleState(n);
+    celebrate(b.t);
     const lines = $("#bag-lines"); if (!lines) return;
-    const total = cart.total_price, n = cart.item_count;
-    const free = C.freeShip || 9900, bq = C.bundleQty || 6;
+    const total = cart.total_price, original = cart.original_total_price || total, saved = original - total;
+    const free = C.freeShip || 9900;
     const ship = $("#ship-msg"), bundle = $("#bundle-msg");
     if (ship) ship.innerHTML = total >= free ? "<b>Free delivery unlocked.</b>" : `Add <b>${money(free - total)}</b> for free delivery.`;
     const sb = $("#ship-bar"); if (sb) sb.style.width = Math.min(100, (total / free) * 100) + "%";
-    if (bundle) bundle.innerHTML = n >= bq ? "<b>Bundle savings unlocked</b>, applied at checkout." : `Add <b>${bq - n} more</b> to unlock ${esc(C.bundleText || "bundle savings")}.`;
-    const bb = $("#bundle-bar"); if (bb) bb.style.width = Math.min(100, (n / bq) * 100) + "%";
-    const sub = $("#bag-sub"); if (sub) sub.textContent = money(total);
+    if (bundle) { bundle.innerHTML = b.msg; bundle.classList.toggle("is-on", b.t > 0); }
+    const bb = $("#bundle-bar"); if (bb) { bb.style.width = b.width + "%"; bb.parentElement.classList.toggle("is-on", b.t > 0); }
+    const marks = $(".bar.tiers");
+    if (marks && !marks.dataset.built) {
+      const max = TIERS[TIERS.length - 1].qty;
+      TIERS.forEach(t => { const m = document.createElement("span"); m.className = "mark"; m.style.left = (t.qty / max) * 100 + "%"; m.dataset.qty = t.qty; marks.appendChild(m); });
+      marks.dataset.built = "1";
+    }
+    $$(".bar.tiers .mark").forEach(m => m.classList.toggle("hit", n >= Number(m.dataset.qty)));
+    const sub = $("#bag-sub"); if (sub) sub.innerHTML = saved > 0 ? `<s>${money(original)}</s> ${money(total)}` : money(total);
+    const sv = $("#bag-saved"); if (sv) { sv.hidden = !(saved > 0); const v = $("[data-saved]", sv); if (v) v.textContent = "−" + money(saved); const l = $("[data-saved-label]", sv); if (l && b.t) l.textContent = `Bundle ${TIERS[b.t - 1].pct}% off`; }
     $$("[data-express]").forEach(e => (e.hidden = !cart.items.length));
     lines.innerHTML = cart.items.length
       ? cart.items.map(it => {
           const img = it.image ? it.image.replace(/(\.[a-z]+)(\?|$)/i, "_160x$1$2") : "";
           const title = (it.product_title || it.title).split(" | ")[0];
           const variant = it.product_has_only_default_variant ? "" : `<small>${esc(it.variant_title || "")}</small>`;
+          const orig = it.original_line_price, fin = it.final_line_price;
+          const price = orig > fin ? `<s>${money(orig)}</s>${money(fin)}` : money(fin);
           return `<div class="line">${img ? `<img src="${esc(img)}" alt="">` : "<span></span>"}<div><h5><a href="${esc(it.url)}">${esc(title)}</a></h5>${variant}
             <div class="qty"><button type="button" aria-label="Remove one" data-q="${esc(it.key)}" data-n="${it.quantity - 1}">−</button><span>${it.quantity}</span><button type="button" aria-label="Add one" data-q="${esc(it.key)}" data-n="${it.quantity + 1}">+</button></div></div>
-            <div class="price">${money(it.final_line_price)}</div></div>`;
+            <div class="price">${price}</div></div>`;
         }).join("")
       : `<div class="empty"><p>Your bag is empty.</p><a class="btn btn-holo" href="${esc(C.shopUrl || "/collections/all")}">Shop perfume oils <span class="arr">→</span></a></div>`;
+  }
+
+  /* ---------- unlock celebration ---------- */
+  let primed = false; // the first cart read on each page sets the baseline without animating
+  function celebrate(t) {
+    if (!primed) { primed = true; shownTier = t; store.set("el_tier", t); return; }
+    if (t <= shownTier) { shownTier = t; store.set("el_tier", t); return; }
+    shownTier = t; store.set("el_tier", t);
+    if (C.celebrate === false) return;
+    const tier = TIERS[t - 1], next = TIERS[t];
+    const old = $(".unlock"); if (old) old.remove();
+    const el = document.createElement("div");
+    el.className = "unlock"; el.setAttribute("role", "status"); el.setAttribute("aria-live", "polite");
+    const reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let bits = "";
+    if (!reduce) for (let i = 0; i < 26; i++) {
+      const a = (i / 26) * Math.PI * 2 + Math.random() * 0.3, d = 110 + Math.random() * 120;
+      bits += `<i style="--x:${Math.cos(a) * d}px;--y:${Math.sin(a) * d}px;--r:${Math.random() * 540 - 270}deg;--d:${(Math.random() * 0.25).toFixed(2)}s;--c:${["#d4c6f8", "#a9d4f6", "#f5c7e5", "#f7e6b9", "#c3eedc"][i % 5]}"></i>`;
+    }
+    el.innerHTML = `<div class="unlock-card">
+        <div class="burst" aria-hidden="true">${bits}</div>
+        <div class="seal" aria-hidden="true"><b>${tier.pct}%</b><span>OFF</span></div>
+        <p class="eyebrow">Bundle unlocked</p>
+        <h3>You've saved <em>${tier.pct}%</em></h3>
+        <p class="sub">${tier.qty}+ items in your bag, so ${tier.pct}% comes off automatically.${next ? ` Get to ${next.qty} items for ${next.pct}% off.` : ""}</p>
+        <button type="button" class="btn btn-holo" data-unlock-close>Nice <span class="arr">→</span></button>
+      </div>`;
+    document.body.appendChild(el);
+    requestAnimationFrame(() => el.classList.add("on"));
+    const close = () => { el.classList.remove("on"); setTimeout(() => el.remove(), 350); };
+    el.addEventListener("click", e => { if (e.target === el || e.target.closest("[data-unlock-close]")) close(); });
+    setTimeout(close, 4200);
   }
 
   function openBag(on = true) {
@@ -113,7 +173,7 @@
     const st = e.target.closest("[data-step]");
     if (st) { const i = $("#qty"); if (i) i.value = Math.max(1, Math.min(20, (Number(i.value) || 1) + Number(st.dataset.step))); }
   });
-  document.addEventListener("keydown", e => { if (e.key === "Escape") openBag(false); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") { openBag(false); const u = $(".unlock"); if (u) u.remove(); } });
 
   /* ---------- product form ---------- */
   const pf = $("[data-product-form]");

@@ -1,12 +1,15 @@
 {
   "current": {
     "free_shipping_threshold": 99,
-    "bundle_qty": 6,
-    "bundle_text": "bundle savings of up to 15%",
     "contact_email": "admin@extractlab.com.au",
     "social_instagram": "https://www.instagram.com/extractlabs_au/",
     "social_tiktok": "https://www.tiktok.com/@extract.lab",
-    "social_facebook": "https://www.facebook.com/share/1GMhGDq3Z1/"
+    "social_facebook": "https://www.facebook.com/share/1GMhGDq3Z1/",
+    "tier1_qty": 3,
+    "tier1_pct": 10,
+    "tier2_qty": 6,
+    "tier2_pct": 15,
+    "bundle_celebrate": true
   },
   "presets": {
     "Default": {}

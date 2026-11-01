@@ -94,8 +94,8 @@
     "band": {
       "type": "store-band",
       "settings": {
-        "heading": "Buy 6,",
-        "heading_em": "save up to 15%.",
+        "heading": "Buy 3, save 10%.",
+        "heading_em": "Buy 6, save 15%.",
         "sub": "Mix perfume oils, beard oils and sets. The discount applies automatically at checkout, and delivery is free over $99.",
         "btn": "",
         "margin_top": 90
