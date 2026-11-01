@@ -74,20 +74,17 @@
       {
         "type": "url",
         "id": "social_instagram",
-        "label": "Instagram",
-        "default": "https://www.instagram.com/extractlabs_au/"
+        "label": "Instagram"
       },
       {
         "type": "url",
         "id": "social_tiktok",
-        "label": "TikTok",
-        "default": "https://www.tiktok.com/@extract.lab"
+        "label": "TikTok"
       },
       {
         "type": "url",
         "id": "social_facebook",
-        "label": "Facebook",
-        "default": "https://www.facebook.com/share/1GMhGDq3Z1/"
+        "label": "Facebook"
       }
     ]
   }
