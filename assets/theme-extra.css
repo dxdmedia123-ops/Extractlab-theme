@@ -42,3 +42,5 @@ a.chip-btn{text-decoration:none}
 /* Sticky header: Shopify wraps the header in a section div, which limits position:sticky to that div.
    display:contents removes the wrapper's box so the header sticks to the page like the design. */
 .shopify-section-group-header-group{display:contents}
+/* Sticky header: Shopify wraps the header in a section div, which traps position:sticky. Let it flow so the header pins to the viewport like the design. */
+.shopify-section.section-header{display:contents}
