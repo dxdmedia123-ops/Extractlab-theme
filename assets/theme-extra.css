@@ -63,7 +63,7 @@ a.chip-btn{text-decoration:none}
 .unlock-card .sub{display:block;font-size:15px;color:var(--muted);margin:0 0 6px;max-width:30ch}
 .unlock-card .eyebrow{color:var(--muted)}
 .unlock-card .btn{width:100%;height:52px}
-.unlock .seal{position:relative;width:176px;height:176px;border-radius:50%;background:#f6f4f9;color:#0b0b0c;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2px;box-shadow:0 0 0 5px #0b0b0c,0 0 0 6.5px rgba(255,255,255,.55),0 16px 40px rgba(0,0,0,.45),0 0 40px rgba(190,170,245,.25);margin:4px 0 10px;transform:rotate(-6deg);animation:seal .7s cubic-bezier(.2,1.6,.4,1) both}
+.unlock .seal{position:relative;width:176px;height:176px;border-radius:50%;background:var(--holo);color:#0b0b0c;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2px;box-shadow:0 0 0 5px #0b0b0c,0 0 0 6.5px rgba(255,255,255,.55),0 16px 40px rgba(0,0,0,.45),0 0 40px rgba(190,170,245,.25);margin:4px 0 10px;transform:rotate(-6deg);animation:seal .7s cubic-bezier(.2,1.6,.4,1) both}
 .unlock .seal small{font-family:var(--body);font-weight:600;font-size:10px;letter-spacing:.07em;text-transform:uppercase;line-height:1;margin:0 0 2px .07em}
 .unlock .seal b{font-family:var(--display);font-weight:500;font-variation-settings:"opsz" 144;font-size:64px;line-height:.95;letter-spacing:-.02em;color:#0b0b0c;padding:0 .04em}
 .unlock .seal span{font-family:var(--body);font-weight:600;font-size:11px;letter-spacing:.32em;text-transform:uppercase;line-height:1;margin-left:.32em}
