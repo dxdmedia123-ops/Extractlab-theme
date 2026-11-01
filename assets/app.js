@@ -115,7 +115,8 @@
         <button type="button" class="btn btn-holo" data-unlock-close>Nice <span class="arr">→</span></button>
       </div>`;
     document.body.appendChild(el);
-    requestAnimationFrame(() => el.classList.add("on"));
+    void el.offsetWidth; // force a style flush so the fade-in transition runs
+    el.classList.add("on");
     const close = () => { el.classList.remove("on"); setTimeout(() => el.remove(), 350); };
     el.addEventListener("click", e => { if (e.target === el || e.target.closest("[data-unlock-close]")) close(); });
     setTimeout(close, 4200);
