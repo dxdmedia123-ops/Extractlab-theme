@@ -39,3 +39,6 @@ a.chip-btn{text-decoration:none}
 .news form .field{height:58px;flex:1 1 220px}
 .news form .btn{flex:0 0 auto}
 @media (max-width:700px){.news form .btn{flex:1 1 100%}}
+/* Sticky header: Shopify wraps the header in a section div, which limits position:sticky to that div.
+   display:contents removes the wrapper's box so the header sticks to the page like the design. */
+.shopify-section-group-header-group{display:contents}
