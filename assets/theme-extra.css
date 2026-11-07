@@ -3,7 +3,7 @@ img{height:auto}
 .skip:focus{position:fixed;left:16px;top:16px;width:auto;height:auto;clip:auto;z-index:200;background:var(--holo);color:var(--ink);padding:10px 16px;border-radius:999px;font-weight:700}
 a.bag-btn{text-decoration:none;color:var(--fg)}
 a.chip-btn{text-decoration:none}
-.chip-btn[aria-pressed="true"]{color:var(--ink)}
+.chip-btn[aria-pressed="true"]{color:#fff}
 .stepper .qty-input{width:44px;height:44px;border:0;background:transparent;color:var(--fg);text-align:center;font:inherit;font-weight:700;font-variant-numeric:tabular-nums;-moz-appearance:textfield;appearance:textfield}
 .stepper .qty-input::-webkit-outer-spin-button,.stepper .qty-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 .variant-select{-webkit-appearance:none;appearance:none;border-radius:999px;cursor:pointer;padding-right:48px;

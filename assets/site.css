@@ -20,7 +20,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 img{max-width:100%;display:block}
 a{color:inherit}
 button{font:inherit;color:inherit}
-:focus-visible{outline:2px solid #c9b8ff;outline-offset:3px;border-radius:6px}
+:focus-visible{outline:2px solid #7a5ad8;outline-offset:3px;border-radius:6px}
 .wrap{width:min(1280px,100%);margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 @media (min-width:760px){.wrap{padding-left:max(36px,env(safe-area-inset-left,0px));padding-right:max(36px,env(safe-area-inset-right,0px))}}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
@@ -234,7 +234,7 @@ h3{font-family:var(--display);font-weight:400;font-variation-settings:"opsz" 48;
 @media (max-width:800px){.news .box{grid-template-columns:1fr}}
 .news form{display:flex;gap:10px;flex-wrap:wrap}
 .field{flex:1 1 220px;height:58px;border-radius:999px;border:0;background:var(--bg);box-shadow:inset 0 0 0 1.5px var(--line2);color:var(--fg);padding:0 24px;font:inherit;font-size:16px;min-width:0}
-.field:focus{outline:none;box-shadow:inset 0 0 0 2px #c9b8ff}
+.field:focus{outline:none;box-shadow:inset 0 0 0 2px #7a5ad8}
 .form-msg{flex-basis:100%;margin:0;font-size:14px;color:var(--muted)}
 .foot{border-top:1px solid var(--line);padding-block:60px 40px;background:var(--bg)}
 .foot .cols{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:36px}
@@ -300,7 +300,7 @@ h3{font-family:var(--display);font-weight:400;font-variation-settings:"opsz" 48;
 .gallery .main img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
 .thumbs{display:flex;gap:10px}
 .thumbs button{width:84px;height:84px;border-radius:14px;overflow:hidden;border:0;padding:0;cursor:pointer;box-shadow:inset 0 0 0 1.5px var(--line);opacity:.6;background:var(--ph)}
-.thumbs button[aria-current="true"]{opacity:1;box-shadow:0 0 0 2px #c9b8ff}
+.thumbs button[aria-current="true"]{opacity:1;box-shadow:0 0 0 2px #7a5ad8}
 .thumbs img{width:100%;height:100%;object-fit:cover}
 .buy{display:flex;flex-direction:column;gap:22px;min-width:0}
 .buy h1{font-size:clamp(42px,5vw,68px)}
@@ -428,10 +428,10 @@ h3{font-family:var(--display);font-weight:400;font-variation-settings:"opsz" 48;
 }
 /* sort dropdown: custom chevron with proper spacing */
 .toolbar select{-webkit-appearance:none;appearance:none;height:44px;padding:0 46px 0 20px;border-radius:999px;font-family:var(--body);font-weight:700;font-size:14px;color:var(--fg);cursor:pointer;
-  background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23f2f1ee' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 20px center/12px 8px;
+  background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23141316' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 20px center/12px 8px;
   box-shadow:inset 0 0 0 1.5px var(--line2);transition:box-shadow .2s}
 .toolbar select:hover{box-shadow:inset 0 0 0 1.5px var(--fg)}
-.toolbar select:focus-visible{outline:2px solid #c9b8ff;outline-offset:3px}
+.toolbar select:focus-visible{outline:2px solid #7a5ad8;outline-offset:3px}
 .toolbar select option{background:#fff;color:var(--fg);font-weight:400}
 /* "Everything" filter: hollow outline dot */
 .chip-btn[data-f="all"]::before{background:transparent;box-shadow:inset 0 0 0 1.5px currentColor}
@@ -458,7 +458,7 @@ h3{font-family:var(--display);font-weight:400;font-variation-settings:"opsz" 48;
 .contact-form{display:flex;flex-direction:column;gap:26px;min-width:0}
 .contact-art{aspect-ratio:4/5;max-width:440px;width:100%;justify-self:center}
 .form select.field{-webkit-appearance:none;appearance:none;cursor:pointer;padding-right:48px;
-  background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23f2f1ee' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 22px center/12px 8px}
+  background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23141316' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 22px center/12px 8px}
 .form select.field option{background:#fff;color:var(--fg)}
 .faq{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:56px;align-items:start}
 .faq .acc summary{font-size:17px}
