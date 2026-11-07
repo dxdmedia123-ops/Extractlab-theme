@@ -7,20 +7,20 @@ a.chip-btn{text-decoration:none}
 .stepper .qty-input{width:44px;height:44px;border:0;background:transparent;color:var(--fg);text-align:center;font:inherit;font-weight:700;font-variant-numeric:tabular-nums;-moz-appearance:textfield;appearance:textfield}
 .stepper .qty-input::-webkit-outer-spin-button,.stepper .qty-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 .variant-select{-webkit-appearance:none;appearance:none;border-radius:999px;cursor:pointer;padding-right:48px;
-  background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23f2f1ee' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 22px center/12px 8px}
+  background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23141316' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 22px center/12px 8px}
 .btn[disabled]{opacity:.5;cursor:not-allowed;transform:none}
 .pager{display:flex;justify-content:center;align-items:center;gap:16px;margin-top:44px;flex-wrap:wrap}
 .rte p{margin:0 0 12px}
 .rte a,.prose a{color:var(--fg)}
 .rte ul{padding-left:20px}
-.placeholder{width:100%;height:100%;background:#16161a;fill:#3a3a40}
+.placeholder{width:100%;height:100%;background:var(--ph);fill:#b9b5ad}
 .pcard .pimg img,.gallery .main img{display:block}
 .thumbs button img{display:block}
 .page-hero .wrap{align-items:flex-start}
 .line h5 a{color:inherit}
 .drawer[aria-hidden="true"]{visibility:hidden}
 .drawer.on{visibility:visible}
-.form-msg[role="alert"]{color:#ff9b9b}
+.form-msg[role="alert"]{color:#b3261e}
 .chip .stars,.review .stars{display:inline-block}
 .add{text-decoration:none}
 .main-img-loading{opacity:.6;transition:opacity .2s}
@@ -31,7 +31,7 @@ a.chip-btn{text-decoration:none}
 .express-pay[hidden]{display:none}
 .express-pay .shopify-payment-button__button{border-radius:999px;min-height:58px;overflow:hidden}
 .express-pay .shopify-payment-button__button--unbranded{background:transparent;color:var(--fg);box-shadow:inset 0 0 0 1.5px var(--line2);font-family:var(--body);font-weight:700;font-size:17px}
-.express-pay .shopify-payment-button__button--unbranded:hover:not([disabled]){background:rgba(255,255,255,.06)}
+.express-pay .shopify-payment-button__button--unbranded:hover:not([disabled]){background:rgba(20,18,24,.05)}
 .express-pay .shopify-payment-button__more-options{color:var(--muted,#a9a8b3);font-size:13px;margin-top:10px;text-decoration:underline}
 @media (max-width:700px){.express-pay{--shopify-accelerated-checkout-button-block-size:48px}.express-pay .shopify-payment-button__button{min-height:48px}}
 /* Newsletter: Shopify adds .contact-form to customer forms; keep the field and button on one row like the design */
@@ -45,21 +45,21 @@ a.chip-btn{text-decoration:none}
 /* ---------- Bundle tiers: bag meter, savings, unlock celebration ---------- */
 .bar.tiers{position:relative;overflow:visible}
 .bar.tiers i{position:relative;z-index:1}
-.bar.tiers .mark{position:absolute;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--bg2);box-shadow:inset 0 0 0 2px rgba(255,255,255,.22);z-index:2;transition:background .3s,box-shadow .3s,transform .3s}
+.bar.tiers .mark{position:absolute;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--bg2);box-shadow:inset 0 0 0 2px rgba(20,18,24,.22);z-index:2;transition:background .3s,box-shadow .3s,transform .3s}
 .bar.tiers .mark:last-child{margin-left:-14px}
 .bar.tiers .mark.hit{background:var(--holo);box-shadow:0 0 0 2px var(--bg2),0 0 12px rgba(212,198,248,.7);transform:scale(1.15)}
-.bundle-meter .unlocked{background:var(--holo);-webkit-background-clip:text;background-clip:text;color:transparent}
+.bundle-meter .unlocked{background:var(--holo-ink);-webkit-background-clip:text;background-clip:text;color:transparent}
 .saved-row{font-size:15px;color:var(--fg)}
-.saved-row b{font-family:var(--body);font-size:16px;font-weight:700;background:var(--holo);-webkit-background-clip:text;background-clip:text;color:transparent}
+.saved-row b{font-family:var(--body);font-size:16px;font-weight:700;background:var(--holo-ink);-webkit-background-clip:text;background-clip:text;color:transparent}
 .saved-row[hidden]{display:none}
 .sub b s,.line .price s{font-family:var(--body);font-size:.6em;color:var(--dim);margin-right:6px;vertical-align:middle}
 .line .price s{display:block;margin:0 0 2px;text-align:right;font-size:13px}
-.unlock{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:20px;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);opacity:0;transition:opacity .3s ease}
+.unlock{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:20px;background:rgba(20,18,24,.35);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);opacity:0;transition:opacity .3s ease}
 .unlock.on{opacity:1}
-.unlock-card{position:relative;width:min(380px,100%);border-radius:28px;padding:34px 26px 26px;text-align:center;background:var(--bg2);border:1px solid var(--line2);box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(212,198,248,.25) inset;display:flex;flex-direction:column;align-items:center;gap:10px;transform:translateY(16px) scale(.94);transition:transform .45s cubic-bezier(.2,1.4,.4,1)}
+.unlock-card{position:relative;width:min(380px,100%);border-radius:28px;padding:34px 26px 26px;text-align:center;background:var(--panel);border:1px solid var(--line);box-shadow:0 30px 80px rgba(40,28,70,.25),0 0 0 1px rgba(212,198,248,.35) inset;display:flex;flex-direction:column;align-items:center;gap:10px;transform:translateY(16px) scale(.94);transition:transform .45s cubic-bezier(.2,1.4,.4,1)}
 .unlock.on .unlock-card{transform:none}
 .unlock-card h3{font-family:var(--display);font-weight:300;font-size:34px;line-height:1.05;margin:0}
-.unlock-card h3 em{background:var(--holo);-webkit-background-clip:text;background-clip:text;color:transparent}
+.unlock-card h3 em{background:var(--holo-ink);-webkit-background-clip:text;background-clip:text;color:transparent}
 .unlock-card .sub{display:block;font-size:15px;color:var(--muted);margin:0 0 6px;max-width:30ch}
 .unlock-card .eyebrow{color:var(--muted)}
 .unlock-card .btn{width:100%;height:52px}
