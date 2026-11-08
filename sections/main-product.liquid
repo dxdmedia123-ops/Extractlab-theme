@@ -66,7 +66,9 @@
   <div class="wrap pdp">
     <div class="gallery">
       <div class="main">
+        {%- assign light = product.metafields.custom.light_image.value -%}
         {%- assign first = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
+        {%- if light -%}{%- assign first = light -%}{%- endif -%}
         {%- if first -%}
           {%- assign main_alt = first.alt | default: title | escape -%}
           {{ first | image_url: width: 1400 | image_tag: id: 'main-img', loading: 'eager', fetchpriority: 'high', widths: '500, 800, 1100, 1400', sizes: '(min-width: 900px) 50vw, 100vw', alt: main_alt }}
@@ -76,7 +78,13 @@
       </div>
       {%- if product.media.size > 1 -%}
         <div class="thumbs">
+          {%- if light -%}
+            <button type="button" aria-label="Show photo 1" aria-current="true" data-img="{{ light | image_url: width: 1400 }}" data-srcset="{{ light | image_url: width: 800 }} 800w, {{ light | image_url: width: 1400 }} 1400w">
+              {{ light | image_url: width: 200 | image_tag: loading: 'lazy', alt: '' }}
+            </button>
+          {%- endif -%}
           {%- for m in product.media -%}
+            {%- if light and m.id == product.featured_media.id -%}{%- continue -%}{%- endif -%}
             {%- if m.media_type == 'image' -%}
               <button type="button" aria-label="Show photo {{ forloop.index }}" aria-current="{% if m.id == first.id %}true{% else %}false{% endif %}" data-img="{{ m | image_url: width: 1400 }}" data-srcset="{{ m | image_url: width: 800 }} 800w, {{ m | image_url: width: 1400 }} 1400w">
                 {{ m | image_url: width: 200 | image_tag: loading: 'lazy', alt: '' }}
@@ -178,7 +186,8 @@
 </div>
 
 <div class="mbar" aria-hidden="true">
-  {%- if product.featured_media -%}{{ product.featured_media | image_url: width: 120 | image_tag: alt: '' }}{%- endif -%}
+  {%- assign bar_img = product.metafields.custom.light_image.value | default: product.featured_media -%}
+  {%- if bar_img -%}{{ bar_img | image_url: width: 120 | image_tag: alt: '' }}{%- endif -%}
   <div><b>{{ title }}</b><span>{{ current.price | money }}</span></div>
   {%- if current.available -%}<button class="btn btn-holo" type="button" data-add="{{ current.id }}" data-title="{{ title | escape }}" tabindex="-1">Add to bag</button>{%- endif -%}
 </div>

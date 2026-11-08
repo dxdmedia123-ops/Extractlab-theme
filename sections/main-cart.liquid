@@ -11,7 +11,8 @@
         <div class="lines">
           {%- for item in cart.items -%}
             <div class="line">
-              {%- if item.image -%}{{ item.image | image_url: width: 160 | image_tag: alt: '' }}{%- endif -%}
+              {%- assign line_img = item.product.metafields.custom.light_image.value | default: item.image -%}
+              {%- if line_img -%}{{ line_img | image_url: width: 160 | image_tag: alt: '' }}{%- endif -%}
               <div>
                 <h5><a href="{{ item.url }}" style="text-decoration:none">{{ item.product.title | split: ' | ' | first }}</a></h5>
                 {%- unless item.product.has_only_default_variant -%}<small>{{ item.variant.title }}</small>{%- endunless -%}

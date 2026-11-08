@@ -14,11 +14,13 @@
   assign v = product.selected_or_first_available_variant
   assign lz = loading | default: 'lazy'
   assign img_alt = product.featured_media.alt | default: product.title | escape
+  # Light theme: prefer the product's light-background photo when one is set
+  assign card_img = product.metafields.custom.light_image.value | default: product.featured_media
 -%}
 <article class="pcard" style="--acc:{{ acc }}">
   <a class="pimg" href="{{ product.url }}">
-    {%- if product.featured_media -%}
-      {{ product.featured_media | image_url: width: 900 | image_tag: loading: lz, widths: '360, 540, 720, 900', sizes: '(min-width: 1000px) 25vw, (min-width: 700px) 33vw, 50vw', alt: img_alt }}
+    {%- if card_img -%}
+      {{ card_img | image_url: width: 900 | image_tag: loading: lz, widths: '360, 540, 720, 900', sizes: '(min-width: 1000px) 25vw, (min-width: 700px) 33vw, 50vw', alt: img_alt }}
     {%- else -%}
       {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
     {%- endif -%}
