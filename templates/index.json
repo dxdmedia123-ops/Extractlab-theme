@@ -267,6 +267,8 @@
     "founder": {
       "type": "founder",
       "settings": {
+        "image": "shopify://shop_images/founder_adam.jpg",
+        "image_alt": "Adam, founder of Extract Labs, holding roll-on bottles at sunset in Brisbane",
         "btn_link": "shopify://pages/our-story"
       }
     },
