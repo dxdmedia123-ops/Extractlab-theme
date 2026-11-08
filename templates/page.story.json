@@ -1,7 +1,10 @@
 {
   "sections": {
     "main": {
-      "type": "story-page"
+      "type": "story-page",
+      "settings": {
+        "img2": "shopify://shop_images/lineup_collections.jpg"
+      }
     }
   },
   "order": [
