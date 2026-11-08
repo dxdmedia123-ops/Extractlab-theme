@@ -3,7 +3,8 @@
     "main": {
       "type": "story-page",
       "settings": {
-        "img2": "shopify://shop_images/lineup_collections.jpg"
+        "img2": "shopify://shop_images/lineup_collections.jpg",
+        "img3": "shopify://shop_images/store_queenst.jpg"
       }
     }
   },
