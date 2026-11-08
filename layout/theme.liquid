@@ -39,7 +39,13 @@
           { qty: {{ settings.tier1_qty | default: 3 }}, pct: {{ settings.tier1_pct | default: 10 }} },
           { qty: {{ settings.tier2_qty | default: 6 }}, pct: {{ settings.tier2_pct | default: 15 }} }
         ],
-        celebrate: {{ settings.bundle_celebrate | json }}
+        celebrate: {{ settings.bundle_celebrate | json }},
+        lightImg: {
+          {%- for p in collections.all.products limit: 250 -%}
+            {%- assign li = p.metafields.custom.light_image.value -%}
+            {%- if li -%}{{ p.handle | json }}: {{ li | image_url: width: 160 | json }},{%- endif -%}
+          {%- endfor -%}
+        }
       };
     </script>
     <script src="{{ 'app.js' | asset_url }}" defer></script>

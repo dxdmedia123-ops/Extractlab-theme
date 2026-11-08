@@ -18,7 +18,7 @@
         {%- capture notes -%}{% render 'product-notes', product: product %}{%- endcapture -%}
         <div class="set">
           <a class="card" href="{{ product.url }}">
-            {%- if product.featured_media -%}{{ product.featured_media | image_url: width: 900 | image_tag: loading: 'lazy', widths: '400, 600, 900', sizes: '(min-width: 900px) 33vw, 100vw' }}{%- else -%}{{ 'product-1' | placeholder_svg_tag }}{%- endif -%}
+            {%- assign set_img = product.metafields.custom.light_image.value | default: product.featured_media -%}{%- if set_img -%}{{ set_img | image_url: width: 900 | image_tag: loading: 'lazy', widths: '400, 600, 900', sizes: '(min-width: 900px) 33vw, 100vw' }}{%- else -%}{{ 'product-1' | placeholder_svg_tag }}{%- endif -%}
           </a>
           <h3>{{ product.title | remove: ' Discovery Set' | split: ' | ' | first }}</h3>
           {%- if notes != blank -%}<p>{{ notes }}</p>{%- else -%}<p>Three full-size 9ml perfume oils</p>{%- endif -%}

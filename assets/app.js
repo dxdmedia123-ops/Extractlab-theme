@@ -77,7 +77,8 @@
     $$("[data-express]").forEach(e => (e.hidden = !cart.items.length));
     lines.innerHTML = cart.items.length
       ? cart.items.map(it => {
-          const img = it.image ? it.image.replace(/(\.[a-z]+)(\?|$)/i, "_160x$1$2") : "";
+          const light = (window.EL && EL.lightImg) ? EL.lightImg[it.handle] : "";
+          const img = light || (it.image ? it.image.replace(/(\.[a-z]+)(\?|$)/i, "_160x$1$2") : "");
           const title = (it.product_title || it.title).split(" | ")[0];
           const variant = it.product_has_only_default_variant ? "" : `<small>${esc(it.variant_title || "")}</small>`;
           const orig = it.original_line_price, fin = it.final_line_price;
